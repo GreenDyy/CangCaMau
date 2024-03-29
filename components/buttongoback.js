@@ -4,12 +4,12 @@ import { icons } from '../constants/manager'
 
 
 
-function ButtonGoBack({navigation}) {
+function ButtonGoBack({navigation, tintColor}) {
     return (
         <TouchableOpacity style={{ margin: 10, marginEnd: '92%' }} onPress={() => {
             navigation.goBack()
         }}>
-            <Image source={icons.back} />
+            <Image source={icons.back} style={{tintColor: tintColor}}/>
         </TouchableOpacity>
     )
 }

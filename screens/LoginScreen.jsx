@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ImageBackground, Image, TextInput, StyleSheet, StatusBar, ScrollView } from 'react-native'
 import { icons, images } from '../constants/manager'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function LoginScreen({ navigation }) {
@@ -10,10 +11,22 @@ function LoginScreen({ navigation }) {
     const [selectedRole, setSelectedRole] = useState('Chủ tàu');
     const [savePass, setSavePass] = useState(false)
 
+    const phepCong = ({a,b})=>{
+        return a+b;
+    }
+
+    AsyncStorage.setItem('key', 'value')
+        .then(() => {
+            console.log('Dữ liệu đã được lưu thành công!');
+        })
+        .catch((error) => {
+            console.error('Lỗi khi lưu dữ liệu:', error);
+        });
+
     return (
-        
+
         <View style={{ flex: 1 }}>
-            <StatusBar backgroundColor={'lightgreen'} barStyle={"dark-content"} />
+            <StatusBar backgroundColor={'white'} barStyle={"dark-content"} />
             <ImageBackground source={images.bglogin} resizeMode="stretch"
                 style={{
                     width: '100%',
@@ -70,11 +83,11 @@ function LoginScreen({ navigation }) {
                         </View>
 
                         <TouchableOpacity style={{ backgroundColor: '#005F94', paddingHorizontal: 20, paddingVertical: 10, marginHorizontal: 100, borderRadius: 10, marginVertical: 40 }}
-                        onPress={()=>navigation.navigate('Home')}>
+                            onPress={() => navigation.navigate('Home')}>
                             <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>Đăng nhập</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={{ marginHorizontal: 120 }} onPress={()=>{
+                        <TouchableOpacity style={{ marginHorizontal: 120 }} onPress={() => {
                             navigation.navigate('ForgetPass')
                         }}>
                             <Text style={{ color: '#005F94', textAlign: 'center' }}>Quên mật khẩu?</Text>
@@ -85,6 +98,14 @@ function LoginScreen({ navigation }) {
                             <TouchableOpacity onPress={() => { navigation.push('Register') }}>
                                 <Text style={{ fontWeight: 'bold', color: '#005F94' }}>Đăng ký ngay</Text>
                             </TouchableOpacity>
+                            
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 40 }}>
+                            <Text>cộng </Text>
+                            <TouchableOpacity onPress={() => { phepCong }}>
+                                <Text style={{ fontWeight: 'bold', color: '#005F94' }}>test</Text>
+                            </TouchableOpacity>
+                            
                         </View>
                     </View>
                     {/* fotter */}

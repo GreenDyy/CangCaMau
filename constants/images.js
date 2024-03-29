@@ -14,4 +14,5 @@ export default {
     lichsutainan: require('../assests/images/lichsutainan.png'),
     canhbao: require('../assests/images/canhbao.png'),
     avatar: require('../assests/images/avatar.png'),
+    avatar1: require('../assests/images/avatar1.png'),
 }
