@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, SafeAreaView, Image, ScrollView, FlatList, Dimensions } from 'react-native'
 import { images, icons } from '../constants/manager'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DATA = [
     {
@@ -56,7 +57,27 @@ const Item = ({ title, image, textcolor, bgcolor }) => (
     </TouchableOpacity>
 )
 
+
+
 function HomeScreen({ navigation }) {
+
+    const [userProfile, setUserProfile] = useState(null)
+
+    useEffect(() => {
+        console.log('Idle Home')
+        const getProfile = async () => {
+            try {
+                const myData = await AsyncStorage.getItem('myProfile')
+                const parseMyData = myData != null ? JSON.parse(myData) : null
+                setUserProfile(parseMyData)
+            }
+            catch (e) {
+                console.error('Lỗi khi get data từ AsyncStorage: ', e);
+                Alert.alert('Error', 'Lỗi khi get data từ AsyncStorage');
+            }
+        }
+        getProfile()
+    }, [])
 
     return (
         <View style={{ flex: 1 }}>
@@ -64,16 +85,16 @@ function HomeScreen({ navigation }) {
             <View style={{ flexDirection: 'row', marginBottom: 10, margin: 10 }}>
                 <Image source={images.avatar1} style={{ height: 40, width: 40 }} />
                 <View style={{ marginLeft: 10 }}>
-                    <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>Huỳnh Khánh Duy</Text>
-                    <Text style={{ fontSize: 12, color: '#005F94' }}>Thuyền trưởng</Text>
+                    <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{userProfile && userProfile.name}</Text>
+                    <Text style={{ fontSize: 12, color: '#005F94' }}>{userProfile && userProfile.loaithuyenvien}</Text>
                 </View>
             </View>
             {/* gạch chân */}
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#F5F5F5', elevation: 5 }}></View>
-           <View style={{margin: 10}}>
-           <Text style={{ fontSize: 18, color: '#005F94' }}>Quản lý</Text>
-            <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#005F94' }}>TÀU CÁ CÀ MAU</Text>
-           </View>
+            <View style={{ margin: 10 }}>
+                <Text style={{ fontSize: 18, color: '#005F94' }}>Quản lý</Text>
+                <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#005F94' }}>TÀU CÁ CÀ MAU</Text>
+            </View>
 
             <FlatList style={{ margin: 10 }}
                 showsVerticalScrollIndicator={false}

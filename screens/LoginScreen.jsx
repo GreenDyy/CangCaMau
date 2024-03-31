@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ImageBackground, Image, TextInput, StyleSheet, StatusBar, ScrollView } from 'react-native'
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, ImageBackground, Image, TextInput, StyleSheet, StatusBar, ScrollView, Alert } from 'react-native'
 import { icons, images } from '../constants/manager'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -11,17 +11,40 @@ function LoginScreen({ navigation }) {
     const [selectedRole, setSelectedRole] = useState('Chủ tàu');
     const [savePass, setSavePass] = useState(false)
 
-    const phepCong = ({a,b})=>{
-        return a+b;
+    const myProfile = {
+        user: 'duy',
+        pass: '1',
+        name: 'Huỳnh Khánh Duy',
+        loaithuyenvien: 'Thuyền trưởng',
+        chucvu: 'Chủ tàu',
+        sdt: '0767237493',
+        ngaysinh: '30/09/2002',
     }
 
-    AsyncStorage.setItem('key', 'value')
-        .then(() => {
-            console.log('Dữ liệu đã được lưu thành công!');
-        })
-        .catch((error) => {
-            console.error('Lỗi khi lưu dữ liệu:', error);
-        });
+    const handleLogin = async () => {
+        try {
+            await AsyncStorage.setItem('myProfile', JSON.stringify(myProfile))
+            Alert.alert('Thông báo', 'Đăng nhập thành công')
+            navigation.navigate('Home');
+        }
+        catch {
+            console.log('Lỗi đăng nhập')
+            Alert.alert('Error', 'lỗi đăng nhập')
+        }
+    }
+
+    // useEffect(() => {
+    //     const saveData = async () => {
+    //         try {
+    //             await AsyncStorage.setItem('key', 'value');
+    //             console.log('Dữ liệu đã được lưu thành công!');
+    //         } catch (error) {
+    //             console.error('Lỗi khi lưu dữ liệu:', error);
+    //         }
+    //     };
+
+    //     saveData();
+    // }, []);
 
     return (
 
@@ -83,7 +106,7 @@ function LoginScreen({ navigation }) {
                         </View>
 
                         <TouchableOpacity style={{ backgroundColor: '#005F94', paddingHorizontal: 20, paddingVertical: 10, marginHorizontal: 100, borderRadius: 10, marginVertical: 40 }}
-                            onPress={() => navigation.navigate('Home')}>
+                            onPress={() => {handleLogin()}}>
                             <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>Đăng nhập</Text>
                         </TouchableOpacity>
 
@@ -98,15 +121,9 @@ function LoginScreen({ navigation }) {
                             <TouchableOpacity onPress={() => { navigation.push('Register') }}>
                                 <Text style={{ fontWeight: 'bold', color: '#005F94' }}>Đăng ký ngay</Text>
                             </TouchableOpacity>
-                            
+
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 40 }}>
-                            <Text>cộng </Text>
-                            <TouchableOpacity onPress={() => { phepCong }}>
-                                <Text style={{ fontWeight: 'bold', color: '#005F94' }}>test</Text>
-                            </TouchableOpacity>
-                            
-                        </View>
+
                     </View>
                     {/* fotter */}
                     <View style={{}}>
