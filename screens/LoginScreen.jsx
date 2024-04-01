@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TouchableOpacity, ImageBackground, Image, TextInput, StyleSheet, StatusBar, ScrollView, Alert } from 'react-native'
 import { icons, images } from '../constants/manager'
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,6 +19,7 @@ function LoginScreen({ navigation }) {
         chucvu: 'Chủ tàu',
         sdt: '0767237493',
         ngaysinh: '30/09/2002',
+        avatar: images.avatar1,
     }
 
     const handleLogin = async () => {
@@ -32,19 +33,6 @@ function LoginScreen({ navigation }) {
             Alert.alert('Error', 'lỗi đăng nhập')
         }
     }
-
-    // useEffect(() => {
-    //     const saveData = async () => {
-    //         try {
-    //             await AsyncStorage.setItem('key', 'value');
-    //             console.log('Dữ liệu đã được lưu thành công!');
-    //         } catch (error) {
-    //             console.error('Lỗi khi lưu dữ liệu:', error);
-    //         }
-    //     };
-
-    //     saveData();
-    // }, []);
 
     return (
 
@@ -106,7 +94,7 @@ function LoginScreen({ navigation }) {
                         </View>
 
                         <TouchableOpacity style={{ backgroundColor: '#005F94', paddingHorizontal: 20, paddingVertical: 10, marginHorizontal: 100, borderRadius: 10, marginVertical: 40 }}
-                            onPress={() => {handleLogin()}}>
+                            onPress={() => { handleLogin() }}>
                             <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>Đăng nhập</Text>
                         </TouchableOpacity>
 

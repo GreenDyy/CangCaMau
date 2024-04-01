@@ -34,7 +34,10 @@ function BottomTabHome() {
                     height: 70,
                     borderTopLeftRadius: 40,
                     borderTopRightRadius: 40,
-                }
+                    position: 'absolute',
+                    bottom: 0
+                },
+                tabBarHideOnKeyboard: 'true'
             }}
         >
             <Tab.Screen

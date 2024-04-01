@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     TouchableOpacity,
@@ -10,17 +10,35 @@ import {
     Alert,
 } from 'react-native'
 import { images, icons } from '../constants/manager'
-import ButtonGoBack from "../components/buttongoback";
-
-const PROFILE = {
-    name: 'Huỳnh Khánh Duy',
-    avatar: images.avatar,
-    phone: '0723 0238 293',
-    role: 'Chủ tàu'
-}
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function UpdateProfileScreen({ navigation }) {
+
+    const [userProfile, setUserProfile] = useState(null)
+
+    const [ten, setTen] = useState('')
+
+    useEffect(() => {
+        const getProfile = async () => {
+            try {
+                const myData = await AsyncStorage.getItem('myProfile')
+                const parseMyData = myData ? JSON.parse(myData) : null
+                setUserProfile(parseMyData)
+            }
+            catch (e) {
+                console.error('Lỗi khi get data từ AsyncStorage: ', e);
+                Alert.alert('Error', 'Lỗi khi get data từ AsyncStorage');
+            }
+        }
+        getProfile()
+    }, [])
+
+    //xử lý cập nhật
+    const handleUpdate = ()=>{
+        
+    }
+
     return (
         <View style={{ flex: 1 }}>
             {/* header */}
@@ -55,7 +73,8 @@ function UpdateProfileScreen({ navigation }) {
                 {/* content */}
                 <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10, marginHorizontal: 10, paddingHorizontal: 10, paddingVertical: 15 }}>
                     <Text style={{ fontSize: 12 }}>Họ và tên</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} />
+                    <TextInput style={{ top: -10 }} multiline={true} 
+                    value={userProfile && userProfile.name}/>
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>CMND/CCCD</Text>
@@ -64,7 +83,8 @@ function UpdateProfileScreen({ navigation }) {
 
                     <Text style={{ fontSize: 12 }}>Ngày sinh</Text>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <TextInput style={{ top: -10, width: '97%' }} multiline={true} />
+                        <TextInput style={{ top: -10, width: '97%' }} multiline={true} 
+                        value={userProfile && userProfile.ngaysinh}/>
                         <TouchableOpacity style={{ alignSelf: 'center' }}
                             onPress={() => Alert.alert('Thông báo', 'Mở lịch để chọn')}>
                             <Image source={icons.calendar} resizeMode="contain" style={{ height: 16, width: 16, position: 'absolute', bottom: 0, right: 0 }} />
@@ -89,11 +109,13 @@ function UpdateProfileScreen({ navigation }) {
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Số điện thoại</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} />
+                    <TextInput style={{ top: -10 }} multiline={true} 
+                    value={userProfile && userProfile.sdt}/>
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Loại thuyền viên</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} />
+                    <TextInput style={{ top: -10 }} multiline={true} 
+                    value={userProfile && userProfile.loaithuyenvien}/>
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
                 </View>
 
@@ -118,7 +140,8 @@ function UpdateProfileScreen({ navigation }) {
                 </View>
                 {/* Button? */}
                 <View style={{ flexDirection: 'row', justifyContent: 'center', marginHorizontal: 10, marginVertical: 20 }}>
-                    <TouchableOpacity style={{ backgroundColor: '#005F94', borderRadius: 10, paddingVertical: 10, width: '48%' }}>
+                    <TouchableOpacity style={{ backgroundColor: '#005F94', borderRadius: 10, paddingVertical: 10, width: '48%' }}
+                    onPress={()=>{handleUpdate}}>
                         <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}>Xác nhận</Text>
                     </TouchableOpacity>
                 </View>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
     View,
     TouchableOpacity,
@@ -9,16 +9,28 @@ import {
     StatusBar,
 } from 'react-native'
 import { images, icons } from '../constants/manager'
-
-const PROFILE = {
-    name: 'Huỳnh Khánh Duy',
-    avatar: images.avatar,
-    phone: '0723 0238 293',
-    role: 'Chủ tàu'
-}
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function ProfileScreen({ navigation }) {
+    const [userProfile, setUserProfile] = useState(null)
+
+    useEffect(() => {
+        console.log('Idle Home')
+        const getProfile = async () => {
+            try {
+                const myData = await AsyncStorage.getItem('myProfile')
+                const parseMyData = myData != null ? JSON.parse(myData) : null
+                setUserProfile(parseMyData)
+            }
+            catch (e) {
+                console.error('Lỗi khi get data từ AsyncStorage: ', e);
+                Alert.alert('Error', 'Lỗi khi get data từ AsyncStorage');
+            }
+        }
+        getProfile()
+    }, [])
+
     return (
         <View style={{ flex: 1 }}>
             <StatusBar backgroundColor={'#459AC9'} barStyle={'light-content'} />
@@ -31,11 +43,11 @@ function ProfileScreen({ navigation }) {
                 navigation.navigate('InforProfile')
             }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Image source={images.avatar1} style={{ height: 48, width: 48 }} />
+                    <Image source={userProfile ? userProfile.avatar : images.avatar} style={{ height: 48, width: 48 }} />
                     <View style={{ marginLeft: 10 }}>
-                        <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{PROFILE.name}</Text>
-                        <Text style={{ fontSize: 12 }}>{PROFILE.phone}</Text>
-                        <Text style={{ fontSize: 12 }}>{PROFILE.role}</Text>
+                        <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{userProfile && userProfile.name}</Text>
+                        <Text style={{ fontSize: 12 }}>{userProfile && userProfile.sdt}</Text>
+                        <Text style={{ fontSize: 12 }}>{userProfile && userProfile.chucvu}</Text>
                     </View>
                 </View>
 

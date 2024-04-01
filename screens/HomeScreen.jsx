@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, SafeAreaView, Image, ScrollView, FlatList, Dimensions } from 'react-native'
-import { images, icons } from '../constants/manager'
+import { images } from '../constants/manager'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DATA = [
@@ -58,7 +58,6 @@ const Item = ({ title, image, textcolor, bgcolor }) => (
 )
 
 
-
 function HomeScreen({ navigation }) {
 
     const [userProfile, setUserProfile] = useState(null)
@@ -83,7 +82,7 @@ function HomeScreen({ navigation }) {
         <View style={{ flex: 1 }}>
 
             <View style={{ flexDirection: 'row', marginBottom: 10, margin: 10 }}>
-                <Image source={images.avatar1} style={{ height: 40, width: 40 }} />
+                <Image source={userProfile ? userProfile.avatar : images.avatar} style={{ height: 40, width: 40 }} />
                 <View style={{ marginLeft: 10 }}>
                     <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{userProfile && userProfile.name}</Text>
                     <Text style={{ fontSize: 12, color: '#005F94' }}>{userProfile && userProfile.loaithuyenvien}</Text>

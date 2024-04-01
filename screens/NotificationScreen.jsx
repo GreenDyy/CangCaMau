@@ -110,7 +110,7 @@ function NotificationScreen({ navigation }) {
             {/* searchbar */}
             <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10, margin: 10, borderRadius: 10, backgroundColor: '#DDDDDD' }}>
                 <Image source={icons.search} style={{ height: 20, width: 20 }} />
-                <TextInput style={{ color: 'black' }} placeholder="Nhập nội dung tìm kiếm" placeholderTextColor={'#ADADAD'} />
+                <TextInput style={{ color: 'black', flex: 1 }} placeholder="Nhập nội dung tìm kiếm" placeholderTextColor={'#ADADAD'} />
             </TouchableOpacity>
             {/* content */}
             <View style={{ borderBottomWidth: 0.5, marginLeft: 10 }} />

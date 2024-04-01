@@ -10,6 +10,7 @@ function IntroScreen({ navigation }) {
         const timer = setTimeout(() => { navigation.navigate('Login') }, 1)
         return () => clearTimeout(timer);
     }, [])
+    
     return (
 
         <View style={{ flex: 1 }}>

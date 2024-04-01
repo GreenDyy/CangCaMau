@@ -6,9 +6,10 @@ import ButtonGoBack  from '../components/buttongoback'
 
 function OTPScreen({ navigation }) {
     const [counter, setCounter] = useState(60)
+
     useEffect(() => {
         const timer = setInterval(() => {
-            setCounter(curTime => curTime - 1);
+            setCounter(preTime => preTime - 1);
         }, 1000);
 
         return () => clearInterval(timer);
