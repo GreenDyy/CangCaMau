@@ -9,47 +9,54 @@ const DATA = [
         title: 'Xuất,Nhập bến',
         image: images.xuatnhapben,
         textcolor: '#005F94',
-        bgcolor: '#8DD4FC'
+        bgcolor: '#8DD4FC',
+        screen: 'XuatNhapBen'
     },
     {
         id: '2',
         title: 'Tàu cá',
         image: images.tauca,
         textcolor: '#FF820F',
-        bgcolor: '#FFCFA2'
+        bgcolor: '#FFCFA2',
+        screen: 'XuatNhapBen'
     },
     {
         id: '3',
         title: 'Thuyền viên',
         image: images.thuyenvien,
         textcolor: '#FF820F',
-        bgcolor: '#FFCFA2'
+        bgcolor: '#FFCFA2',
+        screen: 'XuatNhapBen'
     },
     {
         id: '4',
         title: 'Lịch sử vi phạm',
         image: images.lichsuvipham,
         textcolor: '#005F94',
-        bgcolor: '#8DD4FC'
+        bgcolor: '#8DD4FC',
+        screen: 'XuatNhapBen'
     },
     {
         id: '5',
         title: 'Lịch sử tai nạn',
         image: images.lichsutainan,
         textcolor: '#005F94',
-        bgcolor: '#8DD4FC'
+        bgcolor: '#8DD4FC',
+        screen: 'XuatNhapBen'
     },
     {
         id: '6',
         title: 'Cảnh báo',
         image: images.canhbao,
         textcolor: '#FF820F',
-        bgcolor: '#FFCFA2'
+        bgcolor: '#FFCFA2',
+        screen: 'XuatNhapBen'
     },
 ]
 
-const Item = ({ title, image, textcolor, bgcolor }) => (
-    <TouchableOpacity style={{ alignItems: 'center', padding: 30, margin: 5, backgroundColor: bgcolor, borderRadius: 30 }}>
+const Item = ({ title, image, textcolor, bgcolor, screen, navigation }) => (
+    <TouchableOpacity style={{ alignItems: 'center', padding: 30, margin: 5, backgroundColor: bgcolor, borderRadius: 30 }}
+        onPress={() => navigation.navigate(screen)}>
         <View style={{ alignItems: 'center', width: 100 }}>
             <Image source={image} style={{ height: 60, width: 60 }} />
             <Text style={{ color: textcolor, fontWeight: 'bold', textAlign: 'center', marginTop: 10 }}>{title}</Text>
@@ -99,7 +106,7 @@ function HomeScreen({ navigation }) {
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
                 data={DATA}
-                renderItem={({ item }) => (<Item title={item.title} image={item.image} textcolor={item.textcolor} bgcolor={item.bgcolor} />)}
+                renderItem={({ item }) => (<Item title={item.title} image={item.image} textcolor={item.textcolor} bgcolor={item.bgcolor} screen={item.screen} navigation={navigation} />)}
                 keyExtractor={(item) => item.id}
             />
         </View>

@@ -87,7 +87,8 @@ function ProfileScreen({ navigation }) {
                 <Image source={icons.forward} style={{ height: 12, width: 12 }} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={{marginTop : 10, marginHorizontal: 20, paddingVertical: 10, backgroundColor:'white', borderRadius:10}}>
+            <TouchableOpacity style={{marginTop : 10, marginHorizontal: 20, paddingVertical: 10, backgroundColor:'white', borderRadius:10}}
+            onPress={()=>navigation.navigate('Login')}>
                 <Text style={{textAlign:'center', color:'#005F94', fontWeight:'bold'}}>Đăng xuất</Text>
             </TouchableOpacity>
 

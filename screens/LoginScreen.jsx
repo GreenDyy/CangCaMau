@@ -19,6 +19,7 @@ function LoginScreen({ navigation }) {
         chucvu: 'Chủ tàu',
         sdt: '0767237493',
         ngaysinh: '30/09/2002',
+        ngaycap: '30/09/2024',
         avatar: images.avatar1,
     }
 
@@ -160,5 +161,5 @@ const styles = StyleSheet.create({
     },
 
 })
-
+ 
 export default LoginScreen

@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import { images, icons } from '../constants/manager'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import QRCodeScreen from "./QRCodeScreen";
 
 function InforProfileScreen({ navigation }) {
 
@@ -58,7 +59,7 @@ function InforProfileScreen({ navigation }) {
                 </View>
 
                 <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 10 }}
-                    onPress={() => Alert.alert('Quét QR tren chip')}>
+                    onPress={() => {<QRCodeScreen/>}}>
                     <Image source={icons.qr} style={{ height: 16, width: 16 }} />
                     <Text style={{ color: '#005F94', textAlign: 'center', fontSize: 12, borderBottomWidth: 0.2, marginLeft: 5, borderBottomColor: '#005F94' }}>Đăng ký bằng CCCD gắn chíp</Text>
                 </TouchableOpacity>

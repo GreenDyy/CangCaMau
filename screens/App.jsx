@@ -19,6 +19,7 @@ import ProfileScreen from "./ProfileScreen";
 import InforProfileScreen from "./InforProfileScreen";
 import UpdateProfileScreen from "./UpdateProfileScreen";
 import ChangePassScreen from "./ChangePassScreen";
+import XuatNhapBenScreen from "./XuatNhapBenScreen";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -146,7 +147,7 @@ function App() {
                 <Stack.Screen name='InforProfile' component={InforProfileScreen} />
                 <Stack.Screen name='UpdateProfile' component={UpdateProfileScreen} />
                 <Stack.Screen name='ChangePass' component={ ChangePassScreen} />
-     
+                <Stack.Screen name='XuatNhapBen' component={ XuatNhapBenScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

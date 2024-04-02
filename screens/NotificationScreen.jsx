@@ -104,6 +104,7 @@ const Item = ({ title, icon, content, date }) => (
 )
 
 function NotificationScreen({ navigation }) {
+    
     return (
         <View style={{ flex: 1 }}>
             <Text style={{ color: 'black', fontWeight: 'bold', textAlign: 'center', fontSize: 16 }}>Thông báo</Text>
@@ -118,6 +119,9 @@ function NotificationScreen({ navigation }) {
 
             <FlatList
                 data={DATA}
+                contentContainerStyle={{
+                    paddingBottom: 100
+                }}
                 numColumns={1}
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item }) => (
