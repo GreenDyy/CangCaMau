@@ -20,6 +20,8 @@ import InforProfileScreen from "./InforProfileScreen";
 import UpdateProfileScreen from "./UpdateProfileScreen";
 import ChangePassScreen from "./ChangePassScreen";
 import XuatNhapBenScreen from "./XuatNhapBenScreen";
+import QRCodeScreen from "./QRCodeScreen";
+import LocKetQuaScreen from "./LocKetQuaScreen";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -146,8 +148,10 @@ function App() {
                 <Stack.Screen name='ForgetNewPass' component={ForgetNewPassScreen} />
                 <Stack.Screen name='InforProfile' component={InforProfileScreen} />
                 <Stack.Screen name='UpdateProfile' component={UpdateProfileScreen} />
-                <Stack.Screen name='ChangePass' component={ ChangePassScreen} />
-                <Stack.Screen name='XuatNhapBen' component={ XuatNhapBenScreen} />
+                <Stack.Screen name='ChangePass' component={ChangePassScreen} />
+                <Stack.Screen name='XuatNhapBen' component={XuatNhapBenScreen} />
+                <Stack.Screen name='QRCode' component={QRCodeScreen} />
+                <Stack.Screen name='LocKetQua' component={LocKetQuaScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

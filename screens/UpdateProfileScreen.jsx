@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 import { images, icons } from '../constants/manager'
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 

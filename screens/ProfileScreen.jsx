@@ -45,7 +45,7 @@ function ProfileScreen({ navigation }) {
                 <View style={{ flexDirection: 'row' }}>
                     <Image source={userProfile ? userProfile.avatar : images.avatar} style={{ height: 48, width: 48 }} />
                     <View style={{ marginLeft: 10 }}>
-                        <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{userProfile && userProfile.name}</Text>
+                        <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{userProfile && userProfile.ten}</Text>
                         <Text style={{ fontSize: 12 }}>{userProfile && userProfile.sdt}</Text>
                         <Text style={{ fontSize: 12 }}>{userProfile && userProfile.chucvu}</Text>
                     </View>

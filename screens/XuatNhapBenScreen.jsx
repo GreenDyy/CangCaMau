@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     StatusBar,
-    ScrollView
+    ScrollView,
+    TextInput
 } from 'react-native'
 import { icons, images } from '../constants/manager'
 
@@ -13,17 +14,57 @@ const tabs = ['Danh sách', 'Lịch sử yêu cầu']
 
 function XuatNhapBenScreen({ navigation }) {
     const [typeTab, setTypeTab] = useState('Danh sách')
+    const [showSearchBar, setShowSeachBar] = useState(false)
     return (
         <View style={{ flex: 1 }}>
             <StatusBar backgroundColor={'#459AC9'} barStyle={'light-content'} />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10, backgroundColor: '#459AC9' }}>
+            {/* header */}
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#459AC9',paddingTop: 5, paddingBottom: 17, paddingHorizontal: 12, height: 41 }}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}>
                     <Image source={icons.back} style={{ tintColor: 'gray', height: 20, width: 20, tintColor: 'white' }} />
                 </TouchableOpacity>
-                <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center', fontSize: 16 }}>Thông tin xuất nhập bến</Text>
-                {/* View này để căn chỉnh thôi  o-o-o */}
-                <View style={{ width: 20, height: 20 }}></View>
+
+                {
+                    typeTab === tabs[1] && !showSearchBar && (
+                        <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center', fontSize: 16 }}>Thông tin xuất nhập bến</Text>
+                    )
+                }
+                {
+                    typeTab === tabs[1] && showSearchBar && (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, borderRadius: 17, height: 30, backgroundColor: '#6AAED4', paddingLeft: 8, paddingRight: 21, paddingVertical: 9 }}>
+                            <Image source={icons.search} style={{ height: 18, width: 18, tintColor: 'white' }} />
+                            <TextInput style={{ flex: 1, height: 40, color: 'white' }} placeholder="Nhập đăng ký tàu, CMND/CCCD" placeholderTextColor={'white'} />
+                        </View>
+                    )
+                }
+                {
+                    typeTab === tabs[0] && (
+                        <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center', fontSize: 16 }}>Thông tin xuất nhập bến</Text>
+                    )
+                }
+                {
+                    typeTab === tabs[1] && !showSearchBar ? (
+                        <TouchableOpacity
+                            onPress={() => { setShowSeachBar(!showSearchBar) }}>
+                            <Image source={icons.search} style={{ height: 18, width: 18, tintColor: 'white' }} />
+                        </TouchableOpacity>
+                    )
+                        : <View style={{ width: 18, height: 18 }} />
+                }
+
+                {
+                    typeTab === tabs[1] && showSearchBar && (
+                        <View>
+                            <TouchableOpacity onPress={
+                                () => { setShowSeachBar(!showSearchBar) }}>
+                                <Text style={{ color: 'white' }}>Đóng</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                    )
+                }
+
             </View>
 
             <View style={{ margin: 10 }}>
@@ -117,12 +158,38 @@ function XuatNhapBenScreen({ navigation }) {
             )}
             {typeTab === 'Lịch sử yêu cầu' && (
                 <View style={{ flex: 1 }}>
-                    <TouchableOpacity style={{ position: 'absolute', right: 10, top: -70 }}>
-                        <Image source={icons.search} style={{ height: 18, width: 18, tintColor: 'white' }} />
-                    </TouchableOpacity>
+                    {
+                        showSearchBar && (
+                            <View style={{ flexDirection: 'row' }}>
+                                <TouchableOpacity style={{ borderWidth: 1, height: 25, width: 48, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 12 }}
+                                    onPress={() => {
+                                        navigation.navigate('LocKetQua')
+                                    }}>
+                                    <Image source={icons.filter} style={{ width: 14, height: 14 }} />
+                                    <Text style={{ color: 'black', fontSize: 12 }}>Lọc</Text>
+                                </TouchableOpacity>
 
-                    <ScrollView>
+                                <TouchableOpacity style={{ borderWidth: 1, height: 25, width: 116, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 5 }}>
+                                    <Text style={{ color: 'black', fontSize: 12, marginRight: 3 }}>Tất cả tình trạng</Text>
+                                    <Image source={icons.dropdown} style={{ width: 10, height: 6 }} />
+                                </TouchableOpacity>
 
+                                <TouchableOpacity style={{ borderWidth: 1, height: 25, width: 108, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 5 }}>
+                                    <Text style={{ color: 'black', fontSize: 12, marginRight: 3 }}>Tất cả thao tác</Text>
+                                    <Image source={icons.dropdown} style={{ width: 10, height: 6 }} />
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={{ paddingHorizontal: 5, height: 25, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 5, backgroundColor: '#D6D6D6' }}>
+                                    <Image source={icons.calendar} style={{ width: 14, height: 14 }} resizeMode="contain" />
+                                    <Text style={{ color: 'black', fontSize: 12 }}>Thời gian</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    }
+
+
+                    <ScrollView contentContainerStyle={{ paddingTop: 10 }}>
+                        <View style={{ borderBottomWidth: 0.5, marginLeft: 10, borderColor: '#D6D6D6' }} />
                         <View>
                             <TouchableOpacity style={{ margin: 10 }}>
                                 <View style={{ flexDirection: 'row', justifyContent: "space-between", flex: 1, alignItems: 'center' }}>

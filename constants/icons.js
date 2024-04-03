@@ -16,4 +16,7 @@ export default {
     pencil: require('../assests/icons/pencil.png'),
     calendar: require('../assests/icons/calendar.png'),
     delete: require('../assests/icons/delete.png'),
+    filter: require('../assests/icons/filter.png'),
+    dropdown: require('../assests/icons/dropdown.png'),
+    checkcircle: require('../assests/icons/checkcircle.png'),
 }

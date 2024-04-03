@@ -91,7 +91,7 @@ function HomeScreen({ navigation }) {
             <View style={{ flexDirection: 'row', marginBottom: 10, margin: 10 }}>
                 <Image source={userProfile ? userProfile.avatar : images.avatar} style={{ height: 40, width: 40 }} />
                 <View style={{ marginLeft: 10 }}>
-                    <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{userProfile && userProfile.name}</Text>
+                    <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{userProfile && userProfile.ten}</Text>
                     <Text style={{ fontSize: 12, color: '#005F94' }}>{userProfile && userProfile.loaithuyenvien}</Text>
                 </View>
             </View>

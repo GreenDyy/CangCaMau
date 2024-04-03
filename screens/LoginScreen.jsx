@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ImageBackground, Image, TextInput, StyleSheet, StatusBar, ScrollView, Alert } from 'react-native'
 import { icons, images } from '../constants/manager'
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -14,11 +14,11 @@ function LoginScreen({ navigation }) {
     const myProfile = {
         user: 'duy',
         pass: '1',
-        name: 'Huỳnh Khánh Duy',
+        ten: 'Duy',
         loaithuyenvien: 'Thuyền trưởng',
         chucvu: 'Chủ tàu',
         sdt: '0767237493',
-        ngaysinh: '30/09/2002',
+        ngaysinh: '1/09/2002',
         ngaycap: '30/09/2024',
         avatar: images.avatar1,
     }
@@ -26,7 +26,7 @@ function LoginScreen({ navigation }) {
     const handleLogin = async () => {
         try {
             await AsyncStorage.setItem('myProfile', JSON.stringify(myProfile))
-            Alert.alert('Thông báo', 'Đăng nhập thành công')
+            // Alert.alert('Thông báo', 'Đăng nhập thành công')
             navigation.navigate('Home');
         }
         catch {
@@ -161,5 +161,5 @@ const styles = StyleSheet.create({
     },
 
 })
- 
+
 export default LoginScreen

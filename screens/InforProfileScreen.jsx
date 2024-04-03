@@ -11,19 +11,47 @@ import {
 } from 'react-native'
 import { images, icons } from '../constants/manager'
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import QRCodeScreen from "./QRCodeScreen";
 
-function InforProfileScreen({ navigation }) {
-
+function InforProfileScreen({ navigation, route }) {
     const [userProfile, setUserProfile] = useState(null)
 
+    //lấy tt CCCD sau khi quét
     useEffect(() => {
-        console.log('Idle Home')
+        if (route.params?.CCCD) {
+            const arr = route.params?.CCCD.split('|')
+            //cat ra thành như này [    "ma",    "",    "ten",    "ns",    "gt",    "dc",    "ngay cap"]
+
+            const yourCCCD = {
+                ma: arr[0],
+                ten: arr[2],
+                ngaysinh: arr[3],
+                gioitinh: arr[4],
+                diachi: arr[5],
+                ngaycap: arr[6]
+            }
+            const newProfile = { ...userProfile }
+
+            newProfile.ma = yourCCCD.ma
+            newProfile.ten = yourCCCD.ten
+            newProfile.ngaysinh = yourCCCD.ngaysinh.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
+            newProfile.gioitinh = yourCCCD.gioitinh
+            newProfile.diachi = yourCCCD.diachi
+            newProfile.ngaycap = yourCCCD.ngaycap.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
+
+            AsyncStorage.setItem('myProfile', JSON.stringify(newProfile));
+            console.log('lúc này update xong')
+        }
+    }, [route.params?.CCCD]);
+
+    
+    useEffect(() => {
+        console.log('lúc này lấy data')
         const getProfile = async () => {
             try {
                 const myData = await AsyncStorage.getItem('myProfile')
                 const parseMyData = myData ? JSON.parse(myData) : null
                 setUserProfile(parseMyData)
+                console.log(parseMyData)
             }
             catch (e) {
                 console.error('Lỗi khi get data từ AsyncStorage: ', e);
@@ -31,7 +59,8 @@ function InforProfileScreen({ navigation }) {
             }
         }
         getProfile()
-    }, [])
+    }, [route.params?.CCCD])
+
 
     return (
         <View style={{ flex: 1 }}>
@@ -59,22 +88,23 @@ function InforProfileScreen({ navigation }) {
                 </View>
 
                 <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 10 }}
-                    onPress={() => {<QRCodeScreen/>}}>
+                    onPress={() => { navigation.navigate('QRCode') }}>
                     <Image source={icons.qr} style={{ height: 16, width: 16 }} />
                     <Text style={{ color: '#005F94', textAlign: 'center', fontSize: 12, borderBottomWidth: 0.2, marginLeft: 5, borderBottomColor: '#005F94' }}>Đăng ký bằng CCCD gắn chíp</Text>
                 </TouchableOpacity>
                 {/* content */}
                 <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10, marginHorizontal: 10, paddingHorizontal: 10, paddingVertical: 15 }}>
                     <Text style={{ fontSize: 12 }}>Họ và tên</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false}
-                        value={userProfile && userProfile.name} />
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false}
+                        value={userProfile && userProfile.ten} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>CMND/CCCD</Text>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <TextInput style={{ top: -10, width: '97%' }} multiline={true} editable={false} />
+                        <TextInput style={{ top: -10, width: '97%', color: 'black' }} multiline={true} editable={false}
+                            value={userProfile && userProfile.ma} />
                         <TouchableOpacity style={{ alignSelf: 'center' }}
-                            onPress={() => Alert.alert('Thông báo', 'nút này quét mã')}>
+                            onPress={() => { navigation.navigate('QRCode') }}>
                             <Image source={icons.qr} style={{ height: 16, width: 16, position: 'absolute', bottom: 0, right: 0 }} />
                         </TouchableOpacity>
                     </View>
@@ -82,48 +112,52 @@ function InforProfileScreen({ navigation }) {
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Ngày sinh</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false}
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false}
                         value={userProfile && userProfile.ngaysinh} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Địa chỉ</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false}
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false}
+                        value={userProfile && userProfile.diachi}
                     />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Phường/xã</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false} />
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Quận/huyện</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false} />
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Tỉnh/Thành phố</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false} />
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Số điện thoại</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false} />
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false}
+                        value={userProfile && userProfile.sdt}
+                    />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Loại thuyền viên</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false}
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false}
                         value={userProfile && userProfile.loaithuyenvien} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
                 </View>
 
                 <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10, marginHorizontal: 10, paddingHorizontal: 10, paddingVertical: 15, marginTop: 10 }}>
                     <Text style={{ fontSize: 12 }}>Giấy chứng nhận chuyên môn</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false} />
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Cơ quan cấp</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false} />
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
 
                     <Text style={{ fontSize: 12 }}>Ngày cấp</Text>
-                    <TextInput style={{ top: -10 }} multiline={true} editable={false} />
+                    <TextInput style={{ top: -10, color: 'black' }} multiline={true} editable={false}
+                        value={userProfile && userProfile.ngaycap} />
                     <View style={{ borderBottomWidth: 1, top: -20 }} />
                 </View>
                 {/* Button? */}
