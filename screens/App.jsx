@@ -22,6 +22,7 @@ import ChangePassScreen from "./ChangePassScreen";
 import XuatNhapBenScreen from "./XuatNhapBenScreen";
 import QRCodeScreen from "./QRCodeScreen";
 import LocKetQuaScreen from "./LocKetQuaScreen";
+import TrongBoScreen from "./TrongBoScreen";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -152,6 +153,7 @@ function App() {
                 <Stack.Screen name='XuatNhapBen' component={XuatNhapBenScreen} />
                 <Stack.Screen name='QRCode' component={QRCodeScreen} />
                 <Stack.Screen name='LocKetQua' component={LocKetQuaScreen} />
+                <Stack.Screen name='TrongBo' component={TrongBoScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

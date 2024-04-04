@@ -6,11 +6,11 @@ import {
     Image,
     StatusBar,
     ScrollView,
-    TextInput,
     Modal
 } from 'react-native'
 import { icons } from '../constants/manager'
 import { Calendar } from 'react-native-calendars';
+import moment from 'moment'
 
 const listTinhTrang = [
     'Tất cả tình trạng',
@@ -34,10 +34,11 @@ function LocKetQuaScreen({ navigation }) {
     const [tinhTrang, setTinhTrang] = useState('Tất cả tình trạng')
     const [trangThai, setTrangThai] = useState('Tất cả thao tác')
     const [thoiGian, setThoiGian] = useState('Tất cả thời gian')
-
-    const [selectDay, setSelected] = useState('');
     const [showCalendar, setShowCalendar] = useState(false)
     const [calendarFor, setCalendarFor] = useState('')
+    const [tuNgay, setTuNgay] = useState('')
+    const [denNgay, setDenNgay] = useState('')
+
 
     return (
         <View style={{ flex: 1 }}>
@@ -45,7 +46,7 @@ function LocKetQuaScreen({ navigation }) {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10, backgroundColor: '#459AC9' }}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}>
-                    <Image source={icons.back} style={{ tintColor: 'gray', height: 20, width: 20, tintColor: 'white' }} />
+                    <Image source={icons.close} style={{ tintColor: 'gray', height: 20, width: 20, tintColor: 'white' }} />
                 </TouchableOpacity>
 
                 <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center', fontSize: 16 }}>Lọc kết quả</Text>
@@ -53,7 +54,9 @@ function LocKetQuaScreen({ navigation }) {
 
             </View>
 
-            <ScrollView>
+            <ScrollView
+                contentContainerStyle={{ paddingBottom: 10 }}
+                showsVerticalScrollIndicator={false}>
                 {/* Tình trạng duyệt đề nghị */}
                 <View style={{ marginHorizontal: 12 }}>
                     <Text style={{ color: '#005F94', fontSize: 16, fontWeight: 'bold', marginBottom: 5, marginTop: 15 }}>Tình trạng duyệt đề nghị</Text>
@@ -128,6 +131,7 @@ function LocKetQuaScreen({ navigation }) {
                                 <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginVertical: 15 }} />
                             </View>
                         </View>
+
                         <View style={{ flexDirection: 'row', alignItems: 'stretch' }}>
                             <TouchableOpacity
                                 onPress={() => { setThoiGian('Theo ngày') }}>
@@ -136,33 +140,38 @@ function LocKetQuaScreen({ navigation }) {
                                         <View style={{ height: 16, width: 16, backgroundColor: '#F5F5F5', borderRadius: 999, borderWidth: 1, borderColor: 'gray', marginRight: 10 }} />
                                 }
                             </TouchableOpacity>
+                            {/* 2 nút lịch */}
                             <View style={{ flex: 1, flexDirection: 'row' }}>
 
                                 <TouchableOpacity style={{ flexDirection: 'row', borderBottomWidth: 1, width: 119, alignItems: 'center', borderBottomColor: '#D6D6D6' }}
                                     onPress={() => {
                                         setShowCalendar(!showCalendar),
-                                            setCalendarFor('ngaysinh')
+                                            setCalendarFor('tungay')
 
                                     }}>
                                     <Image source={icons.calendar} style={{ height: 14, width: 14, marginRight: 2 }} resizeMode="contain" />
-                                    <Text style={{ color: 'black' }}>Từ ngày</Text>
+                                    <Text style={{ color: 'black' }}>{tuNgay !== '' ? tuNgay : 'Từ ngày'}</Text>
                                 </TouchableOpacity>
 
                                 <View style={{ marginHorizontal: 12 }}>
                                     <Text style={{ color: 'black' }}>-</Text>
                                 </View>
 
-                                <View style={{ flexDirection: 'row', borderBottomWidth: 1, flex: 1, marginRight: 11, alignItems: 'center', borderBottomColor: '#D6D6D6' }}>
+                                <TouchableOpacity style={{ flexDirection: 'row', borderBottomWidth: 1, flex: 1, marginRight: 11, alignItems: 'center', borderBottomColor: '#D6D6D6' }}
+                                    onPress={() => {
+                                        setShowCalendar(!showCalendar),
+                                            setCalendarFor('denngay')
+                                    }}>
                                     <Image source={icons.calendar} style={{ height: 14, width: 14, marginRight: 2 }} resizeMode="contain" />
-                                    <Text style={{ color: 'black' }}>Đến ngày</Text>
-                                </View>
+                                    <Text style={{ color: 'black' }}>{denNgay !== '' ? denNgay : 'Đến ngày'}</Text>
+                                </TouchableOpacity>
 
                             </View>
                         </View>
                     </View>
 
                     <Modal
-                        animationType="fade"
+                        animationType="slidex"
                         transparent={true}
                         visible={showCalendar}>
 
@@ -170,18 +179,18 @@ function LocKetQuaScreen({ navigation }) {
                             <View>
                                 <Calendar style={{ borderTopRightRadius: 30, borderTopLeftRadius: 30 }}
                                     onDayPress={day => {
-                                        setSelected(day.dateString);
-                                        // setUserProfile({ ...userProfile, [calendarFor === 'tungay' ? 'tungay' : 'denngay']: moment(day.dateString).format('DD, MM, YYYY') })
+                                        calendarFor === 'tungay' ? setTuNgay(moment(day.dateString).format('DD/MM/YYYY')) : setDenNgay(moment(day.dateString).format('DD/MM/YYYY'))
+                                        setShowCalendar(false);
                                     }}
                                     markedDates={{
-                                        [selectDay]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
+                                        [calendarFor === 'tungay' ? tuNgay : denNgay]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
                                     }}
 
                                 />
                             </View>
 
                             <TouchableOpacity style={{ marginTop: 10, borderRadius: 10, paddingVertical: 10, backgroundColor: 'white', marginHorizontal: 100 }}
-                                onPress={() => setShowCalendar(!showCalendar)}>
+                                onPress={() => setShowCalendar(false)}>
                                 <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'black' }}>Đóng</Text>
                             </TouchableOpacity>
                         </View>
@@ -189,8 +198,22 @@ function LocKetQuaScreen({ navigation }) {
 
                 </View>
 
+                {/* 2 nút dưới */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 10, marginTop: 29 }}>
+                    <TouchableOpacity style={{ paddingVertical: 10, backgroundColor: 'white', width: 173, height: 38, borderRadius: 6 }}>
+                        <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>Đặt lại</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{ paddingVertical: 10, backgroundColor: '#005F94', width: 173, height: 38, borderRadius: 6 }}
+                        onPress={() => navigation.goBack()}>
+                        <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}>Áp dụng</Text>
+                    </TouchableOpacity>
+                </View>
+
 
             </ScrollView>
+
+
 
         </View>
     )

@@ -19,4 +19,13 @@ export default {
     filter: require('../assests/icons/filter.png'),
     dropdown: require('../assests/icons/dropdown.png'),
     checkcircle: require('../assests/icons/checkcircle.png'),
+    close: require('../assests/icons/close.png'),
+    tau: require('../assests/icons/tau.png'),
+    bendemo: require('../assests/icons/bendemo.png'),
+    avatarchard: require('../assests/icons/avatarchard.png'),
+    avatartv1: require('../assests/icons/avatartv1.png'),
+    avatartv2: require('../assests/icons/avatartv2.png'),
+    avatartv3: require('../assests/icons/avatartv3.png'),
+    fill: require('../assests/icons/fill.png'),
+    deletered: require('../assests/icons/deletered.png'),
 }

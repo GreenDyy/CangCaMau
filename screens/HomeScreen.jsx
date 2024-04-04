@@ -18,7 +18,7 @@ const DATA = [
         image: images.tauca,
         textcolor: '#FF820F',
         bgcolor: '#FFCFA2',
-        screen: 'XuatNhapBen'
+        screen: 'TrongBo'
     },
     {
         id: '3',
