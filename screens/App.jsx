@@ -23,6 +23,10 @@ import XuatNhapBenScreen from "./XuatNhapBenScreen";
 import QRCodeScreen from "./QRCodeScreen";
 import LocKetQuaScreen from "./LocKetQuaScreen";
 import TrongBoScreen from "./TrongBoScreen";
+import NgoaiBienScreen from "./NgoaiBienScreen";
+import PhieuThongBaoXuatBenScreen from "./PhieuThongBaoXuatBenScreen";
+import BienBanKiemTraTauXuatBenScreen from "./BienBanKiemTraTauXuatBenScreen";
+import YeuCauNhapBenScreen from "./YeuCauNhapBenScreen";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -154,6 +158,10 @@ function App() {
                 <Stack.Screen name='QRCode' component={QRCodeScreen} />
                 <Stack.Screen name='LocKetQua' component={LocKetQuaScreen} />
                 <Stack.Screen name='TrongBo' component={TrongBoScreen} />
+                <Stack.Screen name='NgoaiBien' component={NgoaiBienScreen} />
+                <Stack.Screen name='PhieuThongBaoXuatBen' component={PhieuThongBaoXuatBenScreen} />
+                <Stack.Screen name='BienBanKiemTraTauXuatBen' component={BienBanKiemTraTauXuatBenScreen} />
+                <Stack.Screen name='YeuCauNhapBen' component={YeuCauNhapBenScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

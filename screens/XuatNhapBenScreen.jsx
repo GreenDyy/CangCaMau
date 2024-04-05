@@ -15,8 +15,7 @@ const tabs = ['Danh sách', 'Lịch sử yêu cầu']
 function XuatNhapBenScreen({ navigation }) {
     const [typeTab, setTypeTab] = useState('Danh sách')
     const [showSearchBar, setShowSeachBar] = useState(false)
-    const [tuNgay, setTuNgay] = useState('')
-    const [denNgay, setDenNgay] = useState('')
+
     return (
         <View style={{ flex: 1 }}>
             <StatusBar backgroundColor={'#459AC9'} barStyle={'light-content'} />

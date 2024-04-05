@@ -15,4 +15,7 @@ export default {
     canhbao: require('../assests/images/canhbao.png'),
     avatar: require('../assests/images/avatar.png'),
     avatar1: require('../assests/images/avatar1.png'),
+    xb1: require('../assests/images/xb1.png'),
+    xb2: require('../assests/images/xb2.png'),
+    xb3: require('../assests/images/xb3.png'),
 }

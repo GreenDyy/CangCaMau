@@ -28,4 +28,6 @@ export default {
     avatartv3: require('../assests/icons/avatartv3.png'),
     fill: require('../assests/icons/fill.png'),
     deletered: require('../assests/icons/deletered.png'),
+    docs: require('../assests/icons/docs.png'),
+    infor: require('../assests/icons/infor.png'),
 }

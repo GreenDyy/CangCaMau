@@ -17,33 +17,6 @@ import { Calendar } from 'react-native-calendars';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
-const Lich = () => (
-    <Modal
-        animationType="fade"
-        transparent={true}
-        visible={showCalendar}>
-
-        <View style={{ backgroundColor: 'gray', padding: 10, borderRadius: 30, marginTop: '40%', marginHorizontal: 20 }}>
-            <View>
-                <Calendar style={{ borderTopRightRadius: 30, borderTopLeftRadius: 30 }}
-                    onDayPress={day => {
-                        setSelectDay(day.dateString);
-                        setUserProfile({ ...userProfile, [calendarFor === 'ngaysinh' ? 'ngaysinh' : 'ngaycap']: moment(day.dateString).format('DD/MM/YYYY') })
-                    }}
-                    markedDates={{
-                        [selectDay]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
-                    }}
-
-                />
-            </View>
-
-            <TouchableOpacity style={{ marginTop: 10, borderRadius: 10, paddingVertical: 10, backgroundColor: 'white', marginHorizontal: 100 }}
-                onPress={() => setShowCalendar(!showCalendar)}>
-                <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'black' }}>Đóng</Text>
-            </TouchableOpacity>
-        </View>
-    </Modal>
-)
 
 function UpdateProfileScreen({ navigation }) {
 
@@ -139,7 +112,7 @@ function UpdateProfileScreen({ navigation }) {
                         <TouchableOpacity style={{ alignSelf: 'center' }}
                             onPress={() => {
                                 setShowCalendar(!showCalendar),
-                                    setCalendarFor('ngaysinh')
+                                setCalendarFor('ngaysinh')
 
                             }}>
                             <Image source={icons.calendar} resizeMode="contain" style={{ height: 16, width: 16, position: 'absolute', bottom: 0, right: 0 }} />
@@ -206,7 +179,31 @@ function UpdateProfileScreen({ navigation }) {
                         <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}>Xác nhận</Text>
                     </TouchableOpacity>
 
+                    <Modal
+                        animationType="fade"
+                        transparent={true}
+                        visible={showCalendar}>
 
+                        <View style={{ backgroundColor: 'gray', padding: 10, borderRadius: 30, marginTop: '40%', marginHorizontal: 20 }}>
+                            <View>
+                                <Calendar style={{ borderTopRightRadius: 30, borderTopLeftRadius: 30 }}
+                                    onDayPress={day => {
+                                        setSelectDay(day.dateString);
+                                        setUserProfile({ ...userProfile,  [calendarFor === 'ngaysinh' ? 'ngaysinh' : 'ngaycap']: moment(day.dateString).format('DD/MM/YYYY') })
+                                    }}
+                                    markedDates={{
+                                        [selectDay]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
+                                    }}
+
+                                />
+                            </View>
+
+                            <TouchableOpacity style={{ marginTop: 10, borderRadius: 10, paddingVertical: 10, backgroundColor: 'white', marginHorizontal: 100 }}
+                                onPress={() => setShowCalendar(!showCalendar)}>
+                                <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'black' }}>Đóng</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Modal>
 
                 </View>
 

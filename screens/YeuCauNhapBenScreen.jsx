@@ -12,8 +12,7 @@ import {
 
 import { icons, images } from '../constants/manager'
 
-function TrongBoScreen({ navigation }) {
-    const [yeuCauXuatBen, setYeuCauXuatBen] = useState(false)
+function YeuCauNhapBenScreen({ navigation }) {
     const [showPopUp, setShowPopUp] = useState(false)
 
     return (
@@ -25,7 +24,7 @@ function TrongBoScreen({ navigation }) {
                     <Image source={icons.back} style={{ height: 20, width: 20, tintColor: 'black' }} />
                 </TouchableOpacity>
 
-                <Text style={styles.title}>{yeuCauXuatBen ? 'Yêu cầu xuất bến' : '06776 - Thái học 2'}</Text>
+                <Text style={styles.title}>Yêu cầu nhập bến</Text>
 
                 <View style={{ width: 20, height: 20 }} />
             </View>
@@ -54,18 +53,12 @@ function TrongBoScreen({ navigation }) {
                 </View>
 
                 {/* Vị trì */}
-                <Text style={styles.type}>Vị trí</Text>
+                <Text style={styles.type}>Vị trí nhập bến mong muốn</Text>
                 <View style={styles.childContainer}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Image source={icons.bendemo} style={styles.imagesquare} />
-
-                        <View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={styles.title}>Bến Đá Bạc</Text>
-                            </View>
-                            <Text style={styles.text}>Khóm 6B, Trần Văn Thời, Cà Mau</Text>
-                        </View>
-                    </View>
+                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, alignItems:'center' }}>
+                        <Text>- Chọn vị trí cảng -</Text>
+                        <Image source={icons.fill} style={{width: 10, height: 6, tintColor:'black'}} resizeMode="contain"/>
+                    </TouchableOpacity>
                 </View>
 
                 {/* Chủ sở hữu */}
@@ -98,13 +91,9 @@ function TrongBoScreen({ navigation }) {
                 </View>
 
                 {/* nút thêm thuyền viên */}
-                {
-                    yeuCauXuatBen && (
-                        <TouchableOpacity style={{ backgroundColor: '#459AC9', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginBottom: 5 }}>
-                            <Text style={{ color: 'white', fontWeight: 'bold' }}>Thêm thuyền viên</Text>
-                        </TouchableOpacity>
-                    )
-                }
+                <TouchableOpacity style={{ backgroundColor: '#459AC9', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginBottom: 5 }}>
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Thêm thuyền viên</Text>
+                </TouchableOpacity>
 
                 {/* ô trắng 1 */}
                 <TouchableOpacity style={styles.childContainer}>
@@ -122,9 +111,7 @@ function TrongBoScreen({ navigation }) {
                             <Text style={[styles.text, {}]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
                         </View>
                     </View>
-                    {
-                        yeuCauXuatBen ? <Image source={icons.deletered} style={{ height: 16, width: 16 }} /> : <Image source={icons.back} style={styles.backright} />
-                    }
+                    <Image source={icons.deletered} style={{ height: 16, width: 16 }} />
 
                 </TouchableOpacity>
                 <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
@@ -145,9 +132,7 @@ function TrongBoScreen({ navigation }) {
                         </View>
                     </View>
 
-                    {
-                        yeuCauXuatBen ? <Image source={icons.deletered} style={{ height: 16, width: 16 }} /> : <Image source={icons.back} style={styles.backright} />
-                    }
+                    <Image source={icons.deletered} style={{ height: 16, width: 16 }} />
 
                 </TouchableOpacity>
                 <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
@@ -168,31 +153,21 @@ function TrongBoScreen({ navigation }) {
                         </View>
                     </View>
 
-                    {
-                        yeuCauXuatBen ? <Image source={icons.deletered} style={{ height: 16, width: 16 }} /> : <Image source={icons.back} style={styles.backright} />
-                    }
+                    <Image source={icons.deletered} style={{ height: 16, width: 16 }} />
 
                 </TouchableOpacity>
 
-                {
-                    !yeuCauXuatBen ? (
-                        <TouchableOpacity style={{ backgroundColor: '#FD397A', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginTop: 20 }}
-                            onPress={() => setYeuCauXuatBen(!yeuCauXuatBen)}>
-                            <Text style={{ color: 'white', fontWeight: 'bold' }}>Xuất bến</Text>
-                        </TouchableOpacity>
-                    ) :
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <TouchableOpacity style={{ backgroundColor: '#FFFFFF', borderRadius: 6, paddingVertical: 10, width: 165, alignItems: 'center', marginTop: 20 }}
-                                onPress={() => setYeuCauXuatBen(!yeuCauXuatBen)}>
-                                <Text style={{ color: '#828282', fontWeight: 'bold' }}>Đóng</Text>
-                            </TouchableOpacity>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <TouchableOpacity style={{ backgroundColor: '#FFFFFF', borderRadius: 6, paddingVertical: 10, width: 165, alignItems: 'center', marginTop: 20 }}
+                    >
+                        <Text style={{ color: '#828282', fontWeight: 'bold' }}>Đóng</Text>
+                    </TouchableOpacity>
 
-                            <TouchableOpacity style={{ backgroundColor: '#FD397A', borderRadius: 6, paddingVertical: 10, width: 165, alignItems: 'center', marginTop: 20 }}
-                                onPress={() => setShowPopUp(!showPopUp)}>
-                                <Text style={{ color: 'white', fontWeight: 'bold' }}>Yêu cầu xuất bến</Text>
-                            </TouchableOpacity>
-                        </View>
-                }
+                    <TouchableOpacity style={{ backgroundColor: '#3345CB', borderRadius: 6, paddingVertical: 10, width: 165, alignItems: 'center', marginTop: 20 }}
+                        onPress={() => setShowPopUp(!showPopUp)}>
+                        <Text style={{ color: 'white', fontWeight: 'bold' }}>Yêu cầu nhập bến</Text>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
 
             {/* popup xác nhận xuất bến */}
@@ -205,9 +180,9 @@ function TrongBoScreen({ navigation }) {
                 <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: '#454545' }}>
 
                     <View style={{ backgroundColor: 'white', borderTopEndRadius: 15, borderTopStartRadius: 15 }}>
-                        <View style={{paddingHorizontal: 12, paddingBottom: 37, paddingTop: 30}}>
+                        <View style={{ paddingHorizontal: 12, paddingBottom: 37, paddingTop: 30 }}>
                             <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'black' }}>Xác nhận xuất bến</Text>
-                            <Text style={{ color: 'black', fontSize: 16, textAlign: 'center', marginTop: 20, marginBottom: 50}}>
+                            <Text style={{ color: 'black', fontSize: 16, textAlign: 'center', marginTop: 20, marginBottom: 50 }}>
                                 Sau khi yêu cầu được gửi, bạn sẽ không được chỉnh sửa thông tin trong yêu cầu, bạn có chắc chắn gửi đi hay không?
                             </Text>
 
@@ -298,4 +273,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TrongBoScreen
+export default YeuCauNhapBenScreen

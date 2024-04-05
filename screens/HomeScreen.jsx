@@ -26,7 +26,7 @@ const DATA = [
         image: images.thuyenvien,
         textcolor: '#FF820F',
         bgcolor: '#FFCFA2',
-        screen: 'XuatNhapBen'
+        screen: 'NgoaiBien'
     },
     {
         id: '4',
