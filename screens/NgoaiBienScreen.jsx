@@ -13,10 +13,15 @@ import {
 } from 'react-native'
 
 import { icons, images } from '../constants/manager'
+import { XuatBen, NhapBen, TrongBo, NgoaiBien, ChoXacNhanNhapBen, ChoXacNhanXuatBen, DuocTiepNhan, TuChoi, ChoTiepNhanYeuCau } from '../components/status'
+
 
 dataImage = [images.xb1, images.xb2, images.xb3, images.xb3, images.xb3, images.xb3]
 
-function NgoaiBienScreen({ navigation }) {
+function NgoaiBienScreen({ navigation, route }) {
+    // get data tu tu screen trước
+    const { item } = route.params
+
     const [thuGon, setThuGon] = useState(false)
     const [xacNhanXuatBen, setXacNhanXuatBen] = useState(false)
 
@@ -25,11 +30,11 @@ function NgoaiBienScreen({ navigation }) {
             {/* header */}
             <StatusBar barStyle={"dark-content"} backgroundColor={'#F5F5F5'} />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 17 }}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={icons.back} style={{ height: 20, width: 20, tintColor: 'black' }} />
                 </TouchableOpacity>
 
-                <Text style={styles.title}>06812 - Rạng Đông 1</Text>
+                <Text style={styles.title}>{item.title}</Text>
 
                 <View style={{ width: 20, height: 20 }} />
             </View>
@@ -45,7 +50,7 @@ function NgoaiBienScreen({ navigation }) {
 
                         <View>
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={styles.title}>06812 - Rạng Đông 1</Text>
+                                <Text style={styles.title}>{item.title}</Text>
                                 <Text style={styles.trangthai}>Ngoài biển</Text>
                             </View>
                             <Text style={styles.text}>Loại: Khai thác thúy sản</Text>
@@ -177,7 +182,7 @@ function NgoaiBienScreen({ navigation }) {
 
                             <View style={{ marginTop: 20, marginBottom: 10 }}>
                                 <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#459AC9', borderRadius: 6, justifyContent: 'space-between', paddingHorizontal: 10, paddingVertical: 12 }}
-                                onPress={()=>navigation.navigate('PhieuThongBaoXuatBen')}>
+                                    onPress={() => navigation.navigate('PhieuThongBaoXuatBen')}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <Image source={icons.docs} style={{ width: 15, height: 20 }} />
                                         <Text style={{ color: 'white', fontWeight: 'bold', marginLeft: 6 }}>Phiếu thông báo tàu cá xuất cảng</Text>
@@ -186,7 +191,7 @@ function NgoaiBienScreen({ navigation }) {
                                 </TouchableOpacity>
 
                                 <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: '#459AC9', borderRadius: 6, justifyContent: 'space-between', paddingHorizontal: 10, paddingVertical: 12, marginTop: 5 }}
-                                onPress={()=>navigation.navigate('BienBanKiemTraTauXuatBen')}>
+                                    onPress={() => navigation.navigate('BienBanKiemTraTauXuatBen')}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <Image source={icons.docs} style={{ width: 15, height: 20 }} />
                                         <Text style={{ color: 'white', fontWeight: 'bold', marginLeft: 6 }}>Biên bảng xuất bến</Text>
@@ -226,7 +231,7 @@ function NgoaiBienScreen({ navigation }) {
                                     </View>
                                 </View>
 
-                                {/* Trạm trưởng */}
+                                {/* Các thành viên */}
                                 <View style={{
                                     borderRadius: 6,
                                     paddingTop: 20,
@@ -235,7 +240,6 @@ function NgoaiBienScreen({ navigation }) {
                                     justifyContent: 'space-between',
                                     marginTop: 5
                                 }}>
-                                    {/* ô trắng 1 */}
                                     <TouchableOpacity style={styles.childContainer}>
                                         <View>
                                             <Text style={{ color: '#005F94' }}>Trạm trưởng</Text>
@@ -244,7 +248,7 @@ function NgoaiBienScreen({ navigation }) {
 
                                                 <View>
                                                     <Text style={styles.title}>Lê Hoàng Khánh</Text>
-                                                    <Text style={[styles.text, {}]}>Đội trưởng đội Rạch Gốc</Text>
+                                                    <Text style={styles.text}>Đội trưởng đội Rạch Gốc</Text>
                                                 </View>
 
                                             </View>
@@ -252,16 +256,15 @@ function NgoaiBienScreen({ navigation }) {
                                     </TouchableOpacity>
                                     <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginHorizontal: 12 }} />
 
-                                    {/* ô trắng 1 */}
                                     <TouchableOpacity style={styles.childContainer}>
                                         <View>
-                                            <Text style={{ color: '#005F94' }}>Trạm trưởng</Text>
+                                            <Text style={{ color: '#005F94' }}>Nhân viên kiểm soát</Text>
                                             <View style={{ flexDirection: 'row', width: 280 }}>
-                                                <Image source={icons.avatartv3} style={styles.imagecircle} />
+                                                <Image source={icons.avatartv2} style={styles.imagecircle} />
 
                                                 <View>
-                                                    <Text style={styles.title}>Lê Hoàng Khánh</Text>
-                                                    <Text style={[styles.text, {}]}>Đội trưởng đội Rạch Gốc</Text>
+                                                    <Text style={styles.title}>Đào Nguyễn Đạt</Text>
+                                                    <Text style={styles.text}>Chuyên viên Đội Rạch Gốc</Text>
                                                 </View>
 
                                             </View>
@@ -269,16 +272,15 @@ function NgoaiBienScreen({ navigation }) {
                                     </TouchableOpacity>
                                     <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginHorizontal: 12 }} />
 
-                                    {/* ô trắng 1 */}
                                     <TouchableOpacity style={styles.childContainer}>
                                         <View>
-                                            <Text style={{ color: '#005F94' }}>Trạm trưởng</Text>
+                                            <Text style={{ color: '#005F94' }}>Chiến sĩ gác</Text>
                                             <View style={{ flexDirection: 'row', width: 280 }}>
-                                                <Image source={icons.avatartv3} style={styles.imagecircle} />
+                                                <Image source={icons.avatartv1} style={styles.imagecircle} />
 
                                                 <View>
-                                                    <Text style={styles.title}>Lê Hoàng Khánh</Text>
-                                                    <Text style={[styles.text, {}]}>Đội trưởng đội Rạch Gốc</Text>
+                                                    <Text style={styles.title}>Lê Văn Kiển</Text>
+                                                    <Text style={styles.text}>Chuyên viên Đội Rạch Gốc</Text>
                                                 </View>
 
                                             </View>
@@ -301,7 +303,7 @@ function NgoaiBienScreen({ navigation }) {
                                     contentContainerStyle={{}}>
                                     {
                                         dataImage.map((item, index) => (
-                                            <TouchableOpacity key={index} style={{padding: 3}}>
+                                            <TouchableOpacity key={index} style={{ padding: 3 }}>
                                                 <Image key={index} source={item} style={{ width: 110, height: 70, borderRadius: 2 }} resizeMode="contain" />
                                             </TouchableOpacity>
                                         ))
@@ -321,7 +323,7 @@ function NgoaiBienScreen({ navigation }) {
             </ScrollView>
             {
                 thuGon &&
-                <TouchableOpacity style={{ backgroundColor: '#2B13C0', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginTop: 20 }}
+                <TouchableOpacity style={{ backgroundColor: '#2B13C0', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginBottom: 25 }}
                     onPress={() => navigation.navigate('YeuCauNhapBen')}>
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>Nhập bến</Text>
                 </TouchableOpacity>

@@ -6,15 +6,154 @@ import {
     Image,
     StatusBar,
     ScrollView,
-    TextInput
+    TextInput,
 } from 'react-native'
 import { icons, images } from '../constants/manager'
+import {
+    XuatBen, NhapBen, TrongBo, NgoaiBien, ChoXacNhanNhapBen, ChoXacNhanXuatBen,
+    DuocTiepNhan, TuChoi, ChoTiepNhanYeuCau, KhongDuocNhapBen, KhongDuocXuatBen
+} from '../components/status'
 
 const tabs = ['Danh sách', 'Lịch sử yêu cầu']
+const DANHSACH = [
+    {
+        title: '06020 - Thái học 3',
+        trangthai: 'Xuất bến',
+        tinhtrang: 'Chờ tiếp nhận yêu cầu',
+        ngayxuatben: '',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+    {
+        title: '06776 - Thái học 2',
+        trangthai: '',
+        tinhtrang: 'Trong bờ',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '14:10 18/10/2022',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+    {
+        title: '06811 - Thái học 1',
+        trangthai: 'Nhập bến',
+        tinhtrang: 'Chờ tiếp nhận yêu cầu',
+        ngayxuatben: '',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+    {
+        title: '06812 - Rạng Đông 1',
+        trangthai: '',
+        tinhtrang: 'Ngoài biển',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+    {
+        title: '06020 - Xuất Được',
+        trangthai: 'Xuất bến',
+        tinhtrang: 'Được tiếp nhận',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+    {
+        title: '06020 - Nhập Được',
+        trangthai: 'Nhập bến',
+        tinhtrang: 'Được tiếp nhận',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+    {
+        title: '06020 - Xuất Từ',
+        trangthai: 'Xuất bến',
+        tinhtrang: 'Từ chối',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+    {
+        title: '06020 - Nhập Từ',
+        trangthai: 'Nhập bến',
+        tinhtrang: 'Từ chối',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+    {
+        title: '06020 - Nhập Chờ',
+        trangthai: 'Nhập bến',
+        tinhtrang: 'Chờ xác nhận nhập bến',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+    {
+        title: '06020 - Xuất Chờ',
+        trangthai: 'Xuất bến',
+        tinhtrang: 'Chờ xác nhận xuất bến',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+    {
+        title: '06020 - Xuất Không Được',
+        trangthai: 'Xuất bến',
+        tinhtrang: 'Không được xuất bến',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+    {
+        title: '06020 - Nhập Không Được',
+        trangthai: 'Nhập bến',
+        tinhtrang: 'Không được nhập bến',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+    {
+        title: '06020 - Xuất Ngoài Biển',
+        trangthai: 'Xuất bến',
+        tinhtrang: 'Ngoài biển',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+    {
+        title: '06020 - Nhập Trong Bờ',
+        trangthai: 'Nhập bến',
+        tinhtrang: 'Trong bờ',
+        ngayxuatben: '10:24 10/10/2022',
+        ngaynhapben: '',
+        noidung: 'Phan Văn Tiến, CMND: , SDT: 0984042497, Địa chỉ: k1, Xã Long Đức, Thành phố Trà Vinh, Tỉnh Trà Vinh'
+    },
+
+]
 
 function XuatNhapBenScreen({ navigation }) {
     const [typeTab, setTypeTab] = useState('Danh sách')
     const [showSearchBar, setShowSeachBar] = useState(false)
+
+    const NavigateToOtherScreen = (item) => {
+        // tức là chỉ có mỗi tình trạng thôi
+        if (item.trangthai === '' && item.tinhtrang === 'Trong bờ')
+            navigation.navigate('TrongBo', { item: item })
+        else if (item.trangthai === '' && item.tinhtrang === 'Ngoài biển')
+            navigation.navigate('NgoaiBien', { item: item })
+        else if (item.trangthai === 'Xuất bến')
+            navigation.navigate('AllStateXuatBen', { item: item })
+        else if (item.trangthai === 'Nhập bến')
+            navigation.navigate('AllStateNhapBen', { item: item })
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -91,70 +230,58 @@ function XuatNhapBenScreen({ navigation }) {
 
             {typeTab === 'Danh sách' && (
                 <ScrollView style={{ flex: 1 }}>
+                    {
+                        DANHSACH.map((item, index) => (
+                            <View key={index}>
+                                <TouchableOpacity style={{ margin: 10 }} onPress={() => NavigateToOtherScreen(item)}>
+                                    <View style={{ flexDirection: 'row', justifyContent: "space-between", flex: 1, alignItems: 'center' }}>
+                                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>{item.title}</Text>
+                                        <TouchableOpacity>
+                                            <Image source={icons.forward} style={{ height: 12, width: 12, marginLeft: 3 }} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    {/* Status bar */}
+                                    <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', marginTop: 5 }}>
+                                        {/* trangthai */}
+                                        {item.trangthai === 'Nhập bến' && <NhapBen />}
+                                        {item.trangthai === 'Xuất bến' && <XuatBen />}
+                                        {/* tình trạng */}
+                                        {item.tinhtrang === 'Trong bờ' && <TrongBo />}
+                                        {item.tinhtrang === 'Ngoài biển' && <NgoaiBien />}
+                                        {item.tinhtrang === 'Chờ xác nhận xuất bến' && <ChoXacNhanXuatBen />}
+                                        {item.tinhtrang === 'Chờ xác nhận nhập bến' && <ChoXacNhanNhapBen />}
+                                        {item.tinhtrang === 'Được tiếp nhận' && <DuocTiepNhan />}
+                                        {item.tinhtrang === 'Từ chối' && <TuChoi />}
+                                        {item.tinhtrang === 'Chờ tiếp nhận yêu cầu' && <ChoTiepNhanYeuCau />}
+                                        {item.tinhtrang === 'Không được xuất bến' && <KhongDuocXuatBen />}
+                                        {item.tinhtrang === 'Không được nhập bến' && <KhongDuocNhapBen />}
+                                    </View>
 
-                    <TouchableOpacity style={{ margin: 10 }}>
-                        <View style={{ flexDirection: 'row', justifyContent: "space-between", flex: 1, alignItems: 'center' }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>06283 - Thái học 3</Text>
-                            <TouchableOpacity>
-                                <Image source={icons.forward} style={{ height: 12, width: 12, marginLeft: 3 }} />
-                            </TouchableOpacity>
-                        </View>
+                                    <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                                        <View style={{ width: '50%', flexDirection: 'row' }}>
+                                            <Text style={{ fontSize: 12 }}>Xuất bến: </Text>
+                                            <Text style={{ fontSize: 12, fontWeight: 'bold', color: 'black' }}>{item.ngayxuatben ? item.ngayxuatben : '--'}</Text>
+                                        </View>
+                                        <View style={{ width: '50%', flexDirection: 'row' }}>
+                                            <Text style={{ fontSize: 12 }}>Nhập bến: </Text>
+                                            <Text style={{ fontSize: 12, fontWeight: 'bold', color: 'black' }}>{item.ngaynhapben ? item.ngaynhapben : '--'}</Text>
+                                        </View>
+                                    </View>
 
-                        <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', marginTop: 5 }}>
-                            <Text style={{ fontSize: 10, color: 'white', backgroundColor: '#FD397A', borderRadius: 2, paddingHorizontal: 10 }}>Xuất bến</Text>
-                            <Text style={{ fontSize: 10, color: 'white', backgroundColor: '#0ABB87', borderRadius: 10, paddingHorizontal: 10, marginLeft: 5 }}>Chờ tiếp nhận yêu cầu</Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <View style={{ width: '50%', flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 12 }}>Xuất bến: </Text>
-                                <Text style={{ fontSize: 12, fontWeight: 'bold', color: 'black' }}>--</Text>
+                                    <View style={{ marginTop: 5 }}>
+                                        <Text style={{ fontSize: 12 }}>
+                                            {item.noidung}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <View style={{ borderBottomWidth: 0.5, marginLeft: 10 }} />
                             </View>
-                            <View style={{ width: '50%', flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 12 }}>Nhập bến: </Text>
-                                <Text style={{ fontSize: 12, fontWeight: 'bold', color: 'black' }}>14:10 18/10/2022</Text>
-                            </View>
-                        </View>
 
-                        <View style={{ marginTop: 5 }}>
-                            <Text style={{ fontSize: 12 }}>
-                                Huỳnh Khánh Duy, CMND: 2902903903, SDT: 020303922, Địa chỉ: dsaakdakdaskdsadksa
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
+                        ))
+                    }
 
-                    <View style={{ borderBottomWidth: 0.5, marginLeft: 10 }} />
 
-                    <TouchableOpacity style={{ margin: 10 }}>
-                        <View style={{ flexDirection: 'row', justifyContent: "space-between", flex: 1, alignItems: 'center' }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>06283 - Thái học 3</Text>
-                            <TouchableOpacity>
-                                <Image source={icons.forward} style={{ height: 12, width: 12, marginLeft: 3 }} />
-                            </TouchableOpacity>
-                        </View>
 
-                        <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', marginTop: 5 }}>
-                            <Text style={{ fontSize: 10, color: 'white', backgroundColor: '#FF820F', borderRadius: 10, paddingHorizontal: 10 }}>Trong bờ</Text>
-                            <Text style={{ fontSize: 10, color: 'white', backgroundColor: '#0ABB87', borderRadius: 10, paddingHorizontal: 10, marginLeft: 5 }}>Chờ tiếp nhận yêu cầu</Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                            <View style={{ width: '50%' }}>
-                                <Text style={{ fontSize: 12 }}>Xuất bến: --</Text>
-                            </View>
-                            <View style={{ width: '50%' }}>
-                                <Text style={{ fontSize: 12 }}>Nhập bến: --</Text>
-                            </View>
-                        </View>
-
-                        <View style={{ marginTop: 5 }}>
-                            <Text style={{ fontSize: 12 }}>
-                                Huỳnh Khánh Duy, CMND: 2902903903, SDT: 020303922, Địa chỉ: dsaakdakdaskdsadksa
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <View style={{ borderBottomWidth: 0.5, marginLeft: 10 }} />
                 </ScrollView>
             )}
             {typeTab === 'Lịch sử yêu cầu' && (
@@ -192,7 +319,7 @@ function XuatNhapBenScreen({ navigation }) {
                     <ScrollView contentContainerStyle={{ paddingTop: 10 }}>
                         <View style={{ borderBottomWidth: 0.5, marginLeft: 10, borderColor: '#D6D6D6' }} />
                         <View>
-                            <TouchableOpacity style={{ margin: 10 }}>
+                            <TouchableOpacity style={{ margin: 10 }} onPress={() => { navigation.navigate('AllStateXuatBenScreen') }}>
                                 <View style={{ flexDirection: 'row', justifyContent: "space-between", flex: 1, alignItems: 'center' }}>
                                     <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>TV-96077-TS - Thái học 3</Text>
 

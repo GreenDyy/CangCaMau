@@ -26,7 +26,17 @@ import TrongBoScreen from "./TrongBoScreen";
 import NgoaiBienScreen from "./NgoaiBienScreen";
 import PhieuThongBaoXuatBenScreen from "./PhieuThongBaoXuatBenScreen";
 import BienBanKiemTraTauXuatBenScreen from "./BienBanKiemTraTauXuatBenScreen";
+import PhieuThongBaoNhapBenScreen from "./PhieuThongBaoNhapBenScreen";
+import BienBanKiemTraTauNhapBenScreen from "./BienBanKiemTraTauNhapBenScreen";
 import YeuCauNhapBenScreen from "./YeuCauNhapBenScreen";
+import AllStateXuatBenScreen from "./AllStateXuatBenScreen";
+import AllStateNhapBenScreen from "./AllStateNhapBenScreen";
+import TauCaScreen from "./TauCaScreen";
+import ChiTietTauCaScreen from "./ChiTietTauCaScreen";
+import ThongTinThuyenVienScreen from "./ThongTinThuyenVienScreen";
+import ThuyenVienScreen from "./ThuyenVienScreen";
+import ThemThuyenVienScreen from "./ThemThuyenVienScreen";
+import ThongTinTauScreen from "./ThongTinTauScreen";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -161,7 +171,17 @@ function App() {
                 <Stack.Screen name='NgoaiBien' component={NgoaiBienScreen} />
                 <Stack.Screen name='PhieuThongBaoXuatBen' component={PhieuThongBaoXuatBenScreen} />
                 <Stack.Screen name='BienBanKiemTraTauXuatBen' component={BienBanKiemTraTauXuatBenScreen} />
+                <Stack.Screen name='PhieuThongBaoNhapBen' component={PhieuThongBaoNhapBenScreen} />
+                <Stack.Screen name='BienBanKiemTraTauNhapBen' component={BienBanKiemTraTauNhapBenScreen} />
                 <Stack.Screen name='YeuCauNhapBen' component={YeuCauNhapBenScreen} />
+                <Stack.Screen name='AllStateXuatBen' component={AllStateXuatBenScreen} />
+                <Stack.Screen name='AllStateNhapBen' component={AllStateNhapBenScreen} />
+                <Stack.Screen name='TauCa' component={TauCaScreen} />
+                <Stack.Screen name='ChiTietTauCa' component={ChiTietTauCaScreen} />
+                <Stack.Screen name='ThongTinThuyenVien' component={ThongTinThuyenVienScreen} />
+                <Stack.Screen name='ThuyenVien' component={ThuyenVienScreen} />
+                <Stack.Screen name='ThemThuyenVien' component={ThemThuyenVienScreen} />
+                <Stack.Screen name='ThongTinTau' component={ThongTinTauScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

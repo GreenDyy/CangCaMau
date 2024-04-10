@@ -11,8 +11,13 @@ import {
 } from 'react-native'
 
 import { icons, images } from '../constants/manager'
+import { XuatBen, NhapBen, TrongBo, NgoaiBien, ChoXacNhanNhapBen, ChoXacNhanXuatBen, DuocTiepNhan, TuChoi, ChoTiepNhanYeuCau } from '../components/status'
 
-function TrongBoScreen({ navigation }) {
+
+function TrongBoScreen({ navigation, route }) {
+    // get data tu tu screen trước
+    const { item } = route.params   
+
     const [yeuCauXuatBen, setYeuCauXuatBen] = useState(false)
     const [showPopUp, setShowPopUp] = useState(false)
 
@@ -21,11 +26,11 @@ function TrongBoScreen({ navigation }) {
             {/* header */}
             <StatusBar barStyle={"dark-content"} backgroundColor={'#F5F5F5'} />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 17 }}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={icons.back} style={{ height: 20, width: 20, tintColor: 'black' }} />
                 </TouchableOpacity>
 
-                <Text style={styles.title}>{yeuCauXuatBen ? 'Yêu cầu xuất bến' : '06776 - Thái học 2'}</Text>
+                <Text style={styles.title}>{yeuCauXuatBen ? 'Yêu cầu xuất bến' : item.title}</Text>
 
                 <View style={{ width: 20, height: 20 }} />
             </View>
@@ -41,7 +46,7 @@ function TrongBoScreen({ navigation }) {
 
                         <View>
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={styles.title}>06776 - Thái học 2</Text>
+                                <Text style={styles.title}>{item.title}</Text>
                                 <Text style={styles.trangthai}>Trong bờ</Text>
                             </View>
                             <Text style={styles.text}>Loại: Khai thác thúy sản</Text>
@@ -205,9 +210,9 @@ function TrongBoScreen({ navigation }) {
                 <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: '#454545' }}>
 
                     <View style={{ backgroundColor: 'white', borderTopEndRadius: 15, borderTopStartRadius: 15 }}>
-                        <View style={{paddingHorizontal: 12, paddingBottom: 37, paddingTop: 30}}>
+                        <View style={{ paddingHorizontal: 12, paddingBottom: 37, paddingTop: 30 }}>
                             <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'black' }}>Xác nhận xuất bến</Text>
-                            <Text style={{ color: 'black', fontSize: 16, textAlign: 'center', marginTop: 20, marginBottom: 50}}>
+                            <Text style={{ color: 'black', fontSize: 16, textAlign: 'center', marginTop: 20, marginBottom: 50 }}>
                                 Sau khi yêu cầu được gửi, bạn sẽ không được chỉnh sửa thông tin trong yêu cầu, bạn có chắc chắn gửi đi hay không?
                             </Text>
 

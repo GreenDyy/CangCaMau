@@ -11,6 +11,25 @@ import {
 } from 'react-native'
 
 import { icons, images } from '../constants/manager'
+import SelectDropdown from 'react-native-select-dropdown'
+
+const listcang = [
+    {
+        tencang: 'Bến Đà Lạt',
+        diachi: 'Khóm 6B, Trần Văn Thời, Cà Mau',
+        icon: icons.bendemo
+    },
+    {
+        tencang: 'Bến Đà Lợp',
+        diachi: 'Khóm 6B, Trần Văn Thời, Cà Mau',
+        icon: icons.bendemo
+    },
+    {
+        tencang: 'Bến Đà Cạp',
+        diachi: 'Khóm 6B, Trần Văn Thời, Cà Mau',
+        icon: icons.bendemo
+    },
+]
 
 function YeuCauNhapBenScreen({ navigation }) {
     const [showPopUp, setShowPopUp] = useState(false)
@@ -20,7 +39,7 @@ function YeuCauNhapBenScreen({ navigation }) {
             {/* header */}
             <StatusBar barStyle={"dark-content"} backgroundColor={'#F5F5F5'} />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 17 }}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={icons.back} style={{ height: 20, width: 20, tintColor: 'black' }} />
                 </TouchableOpacity>
 
@@ -55,10 +74,52 @@ function YeuCauNhapBenScreen({ navigation }) {
                 {/* Vị trì */}
                 <Text style={styles.type}>Vị trí nhập bến mong muốn</Text>
                 <View style={styles.childContainer}>
-                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, alignItems:'center' }}>
-                        <Text>- Chọn vị trí cảng -</Text>
-                        <Image source={icons.fill} style={{width: 10, height: 6, tintColor:'black'}} resizeMode="contain"/>
-                    </TouchableOpacity>
+                    <SelectDropdown
+                        data={listcang}
+                        onSelect={(selectedItem, index) => {
+                            console.log(selectedItem.tencang, index);
+                        }}
+                        renderButton={(selectedItem, isOpened) => {
+                            return (
+                                selectedItem ?
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-betweens', flex: 1 }}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                            <Image source={selectedItem.icon} style={styles.imagesquare} />
+                                            <View>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <Text style={styles.title}>{selectedItem.tencang}</Text>
+                                                </View>
+                                                <Text style={[styles.text, { width: '100%' }]}>{selectedItem.diachi}</Text>
+                                            </View>
+                                        </View>
+                                        <Image source={icons.fill} style={{ width: 10, height: 6, tintColor: 'black', position: 'absolute', right: 0, top: 15 }} resizeMode="contain" />
+                                    </View> :
+
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, alignItems: 'center' }}>
+                                        <Text style={{}}>{selectedItem ? selectedItem.tencang : '- Chọn vị trí cảng -'}</Text>
+                                        <Image source={icons.fill} style={{ width: 10, height: 6, tintColor: 'black' }} resizeMode="contain" />
+                                    </View>
+                            );
+                        }}
+                        renderItem={(item, index, isSelected) => {
+                            return (
+                                <View style={[styles.childContainer, { backgroundColor: isSelected ? 'gray' : '' }]}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <Image source={item.icon} style={styles.imagesquare} />
+
+                                        <View>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <Text style={styles.title}>{item.tencang}</Text>
+                                            </View>
+                                            <Text style={styles.text}>{item.diachi}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            );
+                        }}
+                        showsVerticalScrollIndicator={false}
+                        dropdownStyle={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, padding: 10 }}
+                    />
                 </View>
 
                 {/* Chủ sở hữu */}
@@ -181,7 +242,7 @@ function YeuCauNhapBenScreen({ navigation }) {
 
                     <View style={{ backgroundColor: 'white', borderTopEndRadius: 15, borderTopStartRadius: 15 }}>
                         <View style={{ paddingHorizontal: 12, paddingBottom: 37, paddingTop: 30 }}>
-                            <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'black' }}>Xác nhận xuất bến</Text>
+                            <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: 'black' }}>Xác nhận nhâp bến</Text>
                             <Text style={{ color: 'black', fontSize: 16, textAlign: 'center', marginTop: 20, marginBottom: 50 }}>
                                 Sau khi yêu cầu được gửi, bạn sẽ không được chỉnh sửa thông tin trong yêu cầu, bạn có chắc chắn gửi đi hay không?
                             </Text>
@@ -195,7 +256,7 @@ function YeuCauNhapBenScreen({ navigation }) {
                                 </TouchableOpacity>
 
                                 <TouchableOpacity
-                                    style={{ backgroundColor: '#FD397A', borderRadius: 6, paddingVertical: 10, width: 165, alignItems: 'center', marginTop: 20 }}
+                                    style={{ backgroundColor: '#3345CB', borderRadius: 6, paddingVertical: 10, width: 165, alignItems: 'center', marginTop: 20 }}
                                     onPress={() => setShowPopUp(!showPopUp)}
                                 >
                                     <Text style={{ color: 'white', fontWeight: 'bold' }}>Xác nhận</Text>

@@ -51,7 +51,8 @@ function BienBanKiemTraTauXuatBenScreen({ navigation }) {
             <StatusBar barStyle={"dark-content"} backgroundColor={'#F5F5F5'} />
             <View style={{ marginBottom: 15 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}>
                         <Image source={icons.back} style={{ height: 20, width: 20, tintColor: 'black' }} />
                     </TouchableOpacity>
 

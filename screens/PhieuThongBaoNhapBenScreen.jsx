@@ -14,6 +14,29 @@ import {
 
 import { icons, images } from '../constants/manager'
 
+const dataSanLuongKhaiThac = [
+    {
+        tenca: 'Cá thu',
+        slbaocao: 1200,
+        slthucte: 1233.37
+    },
+    {
+        tenca: 'Cá thác lác',
+        slbaocao: 2200,
+        slthucte: 2199.53
+    },
+    {
+        tenca: 'Cá ngừ',
+        slbaocao: 3100,
+        slthucte: 3099.8
+    },
+    {
+        tenca: 'Cá bò da',
+        slbaocao: 1100,
+        slthucte: 1101.35
+    },
+]
+
 const MyTextInput = ({ header }) => (
     <View>
         <Text>{header}</Text>
@@ -35,7 +58,7 @@ const MyCheckBox = ({ text, state, setState }) => (
     </View>
 )
 
-function PhieuThongBaoXuatBenScreen({ navigation }) {
+function PhieuThongBaoNhapBenScreen({ navigation }) {
     const [checkNhatKyKhaiThac, setCheckNhatKyKhaiThac] = useState(true)
     const [checkBienBanKiemTra, setCheckBienBanKiemTra] = useState(true)
     const [checkSoDanhBa, setCheckSoDanhBa] = useState(true)
@@ -50,11 +73,11 @@ function PhieuThongBaoXuatBenScreen({ navigation }) {
             <View style={{ marginBottom: 15 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
                     <TouchableOpacity
-                      onPress={()=>navigation.goBack()}>
+                        onPress={() => navigation.goBack()}>
                         <Image source={icons.back} style={{ height: 20, width: 20, tintColor: 'black' }} />
                     </TouchableOpacity>
 
-                    <Text style={styles.title}>Phiếu thông báo tàu cá xuất bến</Text>
+                    <Text style={styles.title}>Phiếu thông báo tàu cá nhập bến</Text>
 
                     <View style={{ width: 20, height: 20 }} />
                 </View>
@@ -162,12 +185,58 @@ function PhieuThongBaoXuatBenScreen({ navigation }) {
                     </View>
 
                     <View style={{ borderRadius: 6, backgroundColor: 'white', paddingHorizontal: 12, paddingVertical: 20, marginTop: 5 }}>
-                        <MyTextInput header={'Thời gian'} />
+                        <MyTextInput header={'Kiểm tra nội dung nhật ký'} />
                     </View>
 
-                    {/* 7.Kết luận */}
+                    {/* 7. Kiểm tra sản lượng khai thác */}
                     <View style={{ marginTop: 10 }}>
-                        <Text style={{ color: '#005F94', fontWeight: 'bold', fontSize: 16 }}>7.Kết luận</Text>
+                        <Text style={{ color: '#005F94', fontWeight: 'bold', fontSize: 16 }}>7. Kiểm tra sản lượng khai thác</Text>
+                        {/* header table */}
+                        <View style={{ flexDirection: 'row', width: '100%', backgroundColor: '#459AC9', borderTopRightRadius: 6, borderTopLeftRadius: 6, paddingVertical: 10, paddingLeft: 12, paddingRight: 16, alignItems: 'center' }}>
+                            <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'white', width: '40%' }}>Tên loại thủy sản</Text>
+                            <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'white', width: '30%', textAlign: 'center', paddingHorizontal: 12 }}>Sản lượng báo cáo (kg)</Text>
+                            <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'white', width: '30%', textAlign: 'center', paddingHorizontal: 12 }}>Sản lượng thực tế (kg)</Text>
+                        </View>
+                        {/* body table */}
+                        <View style={{ backgroundColor: 'white' }}>
+                            {
+                                dataSanLuongKhaiThac.map((item, index) => {
+
+                                    return (
+                                        <View key={index} style={{
+                                            borderBottomLeftRadius: index === dataSanLuongKhaiThac.length - 1 ? 6 : 0,
+                                            borderBottomRightRadius: index === dataSanLuongKhaiThac.length - 1 ? 6 : 0,
+                                        }}>
+                                            <View style={{
+                                                flexDirection: 'row',
+                                                backgroundColor: 'white',
+                                                paddingLeft: 12,
+                                                paddingRight: 16,
+                                            }}>
+                                                <Text style={{ fontSize: 13, color: 'black', width: '40%', paddingVertical: 15 }}>{item.tenca}</Text>
+                                                <Text style={{ fontSize: 13, color: 'black', width: '30%', paddingVertical: 15, textAlign: 'center' }}>{item.slbaocao}</Text>
+                                                <Text style={{ fontSize: 13, color: '#005F94', width: '30%', paddingVertical: 15, textAlign: 'center' }}>{item.slthucte}</Text>
+                                            </View>
+                                            {index !== dataSanLuongKhaiThac.length - 1 &&
+                                                <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6' }} />}
+                                        </View>
+                                    )
+                                })
+                            }
+                        </View>
+                        {/* footer table */}
+                        <View style={{ flexDirection: 'row', width: '100%', backgroundColor: 'white', borderTopRightRadius: 6, borderTopLeftRadius: 6, paddingVertical: 10, paddingLeft: 12, paddingRight: 16, alignItems: 'center' }}>
+                            <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black', width: '40%' }}>TỔNG CỘNG</Text>
+                            <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black', width: '30%', textAlign: 'center', paddingHorizontal: 12 }}>7600</Text>
+                            <Text style={{ fontWeight: 'bold', fontSize: 13, color: '#005F94', width: '30%', textAlign: 'center', paddingHorizontal: 12 }}>7,634.05</Text>
+                        </View>
+
+
+                    </View>
+
+                    {/* 8.Kết luận */}
+                    <View style={{ marginTop: 10 }}>
+                        <Text style={{ color: '#005F94', fontWeight: 'bold', fontSize: 16 }}>8.Kết luận</Text>
                         <View style={{ borderRadius: 6, backgroundColor: 'white', paddingHorizontal: 12, paddingVertical: 20 }}>
                             <MyTextInput header={'Thời gian'} />
 
@@ -199,15 +268,15 @@ function PhieuThongBaoXuatBenScreen({ navigation }) {
                 </View>
                 {/* nút đóng */}
                 <TouchableOpacity style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 10, width: 173, alignSelf: 'center', alignItems: 'center', marginBottom: 25 }}
-                onPress={()=>navigation.goBack()}>
+                    onPress={() => navigation.goBack()}>
                     <Text style={{ color: 'black', fontWeight: 'bold' }}>Đóng</Text>
                 </TouchableOpacity>
 
-            </ScrollView>
+            </ScrollView >
 
 
 
-        </View>
+        </View >
     )
 }
 
@@ -293,4 +362,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default PhieuThongBaoXuatBenScreen
+export default PhieuThongBaoNhapBenScreen

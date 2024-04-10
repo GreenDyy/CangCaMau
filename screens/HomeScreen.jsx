@@ -18,7 +18,7 @@ const DATA = [
         image: images.tauca,
         textcolor: '#FF820F',
         bgcolor: '#FFCFA2',
-        screen: 'TrongBo'
+        screen: 'TauCa'
     },
     {
         id: '3',
@@ -26,7 +26,7 @@ const DATA = [
         image: images.thuyenvien,
         textcolor: '#FF820F',
         bgcolor: '#FFCFA2',
-        screen: 'NgoaiBien'
+        screen: 'ThuyenVien'
     },
     {
         id: '4',
@@ -34,7 +34,7 @@ const DATA = [
         image: images.lichsuvipham,
         textcolor: '#005F94',
         bgcolor: '#8DD4FC',
-        screen: 'XuatNhapBen'
+        screen: 'ThongTinThuyenVien'
     },
     {
         id: '5',

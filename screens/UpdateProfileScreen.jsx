@@ -25,7 +25,7 @@ function UpdateProfileScreen({ navigation }) {
     const [selectDay, setSelectDay] = useState('');
     const [showCalendar, setShowCalendar] = useState(false)
     const [calendarFor, setCalendarFor] = useState('')
-
+    
     useEffect(() => {
         const getProfile = async () => {
             try {
@@ -94,7 +94,7 @@ function UpdateProfileScreen({ navigation }) {
                     <Text style={{ color: '#005F94', textAlign: 'center', fontSize: 12, borderBottomWidth: 0.2, marginLeft: 5, borderBottomColor: '#005F94' }}>Đăng ký bằng CCCD gắn chíp</Text>
                 </TouchableOpacity>
                 {/* content */}
-                <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 10, marginHorizontal: 10, paddingHorizontal: 10, paddingVertical: 15 }}>
+                <View style={{ flex: 1, backgroundColor: 'white', borderRadius: 6, marginHorizontal: 10, paddingHorizontal: 10, paddingVertical: 15 }}>
                     <Text style={{ fontSize: 12 }}>Họ và tên</Text>
                     <TextInput style={{ top: -10 }} multiline={true}
                         value={userProfile && userProfile.name}
