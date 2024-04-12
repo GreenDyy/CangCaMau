@@ -84,6 +84,7 @@ function TauCaScreen({ navigation, route }) {
                 )}
             >
             </FlatList>
+            
             <TouchableOpacity style={{marginHorizontal: 12, marginBottom: 12, backgroundColor:'#459AC9', borderRadius: 6, paddingHorizontal: 85, paddingVertical: 10}}
             onPress={()=>navigation.navigate('ThongTinTau')}>
                 <Text style={{color:'white', fontWeight:'bold', textAlign:'center'}}>Thêm phương tiện</Text>

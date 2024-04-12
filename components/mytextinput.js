@@ -11,6 +11,8 @@ const MyTextInput = ({
     value,
     setValue = () => { },
     editable,
+    fontWeight,
+    color = 'black'
 }) => {
     const [showCalendar, setShowCalendar] = useState(false)
     return (
@@ -19,9 +21,10 @@ const MyTextInput = ({
             <View style={{ flexDirection: 'row' }}>
                 <TextInput style={{
                     fontSize: 16,
-                    color: editable ? 'black' : '#828282',
+                    color: color,
                     marginVertical: -10,
                     width: '97%',
+                    fontWeight: fontWeight
                 }}
                     placeholder="--" placeholderTextColor={'black'}
                     value={value}
@@ -29,17 +32,19 @@ const MyTextInput = ({
                     editable={editable}
                 />
                 {
-                    type !== 1 &&
+                    type !== 'none' &&
                     <TouchableOpacity style={{ alignSelf: 'center', position: 'absolute', bottom: 7, right: 0 }}
                         onPress={() => {
                             type === 'delete' && setValue('')
                             type === 'calendar' && setShowCalendar(true)
+
                         }}>
                         {type === 'delete' && <Image source={icons.delete} resizeMode="contain" style={{ height: 10, width: 10 }} />}
-                        {type === 'calendar' && <Image source={icons.calendar} resizeMode="contain" style={{ height: 10, width: 10 }} />}
-                        {type === 'dropdown' && <Image source={icons.dropdown} resizeMode="contain" style={{ height: 10, width: 10 }} />}
+                        {type === 'calendar' && <Image source={icons.calendar} resizeMode="contain" style={{ height: 14.51, width: 16 }} />}
+
                     </TouchableOpacity>
                 }
+
             </View>
 
             {/* calendar */}

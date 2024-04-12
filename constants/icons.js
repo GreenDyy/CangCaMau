@@ -30,4 +30,6 @@ export default {
     deletered: require('../assests/icons/deletered.png'),
     docs: require('../assests/icons/docs.png'),
     infor: require('../assests/icons/infor.png'),
+    upload: require('../assests/icons/upload.png'),
+    add: require('../assests/icons/add.png'),
 }

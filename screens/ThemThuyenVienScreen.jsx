@@ -15,8 +15,11 @@ import { icons, images } from '../constants/manager'
 import MyTextInput from "../components/mytextinput";
 import { Calendar } from 'react-native-calendars';
 import SelectDropdown from 'react-native-select-dropdown'
+import MyCheckBox from "../components/mycheckbox";
 
 function ThemThuyenVienScreen({ navigation, route }) {
+    const [showPopUp, setShowPopUp] = useState(false)
+    const [isSelect, setIsSelect] = useState(false)
     return (
         <View style={{ flex: 1 }}>
             <StatusBar backgroundColor={'#459AC9'} barStyle={'light-content'} />
@@ -37,11 +40,13 @@ function ThemThuyenVienScreen({ navigation, route }) {
 
             </View>
             {/* nút thêm */}
-            <TouchableOpacity style={{ marginTop: 20, marginBottom: 10, marginHorizontal: 12, backgroundColor: '#459AC9', borderRadius: 6, paddingHorizontal: 120, paddingVertical: 12, alignItems: 'center' }} >
+            <TouchableOpacity style={{ marginTop: 20, marginBottom: 10, marginHorizontal: 12, backgroundColor: '#459AC9', borderRadius: 6, paddingHorizontal: 120, paddingVertical: 12, alignItems: 'center' }}
+                onPress={() => setShowPopUp(true)}>
                 <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center', width: 200 }}>Thêm thuyền viên</Text>
             </TouchableOpacity>
             {/* ds thuyền viên */}
-            <View>
+            <ScrollView
+                showsVerticalScrollIndicator={false}>
                 {/* ô trắng 1 */}
                 <TouchableOpacity style={styles.childContainer}>
 
@@ -103,7 +108,190 @@ function ThemThuyenVienScreen({ navigation, route }) {
                 </TouchableOpacity>
                 <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
 
-            </View>
+            </ScrollView>
+
+            {/* Popup hiện ds thuyền viên có sẳn */}
+
+            <Modal
+                visible={showPopUp}
+                transparent={true}
+                animationType="slide"
+            >
+                <View style={{ flex: 1, backgroundColor: '#999999' }}>
+                    <View style={{ flex: 1, backgroundColor: 'white', marginTop: 92, borderRadius: 10 }}>
+                        {/* header */}
+                        <StatusBar barStyle={"dark-content"} backgroundColor={'#F5F5F5'} />
+                        <View style={{ marginTop: 20, marginBottom: 20, paddingHorizontal: 12 }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <TouchableOpacity onPress={() => setShowPopUp(false)}>
+                                    <Image source={icons.back} style={{ height: 20, width: 20, tintColor: 'black' }} />
+                                </TouchableOpacity>
+
+                                <Text style={styles.title}>Thông tin thuyền viên (5)</Text>
+
+                                <View style={{ width: 20, height: 20 }} />
+                            </View>
+                        </View>
+
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            borderRadius: 6,
+                            backgroundColor: '#999999',
+                            marginHorizontal: 12,
+                            paddingHorizontal: 10
+                        }}>
+                            <Image source={icons.search} style={{ height: 20, width: 20, tintColor: 'black' }} resizeMode="contain" />
+                            <TextInput placeholder="Nhập nội dung tìm kiếm" />
+                        </View>
+
+                        <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12, marginTop: 10 }} />
+
+                        <ScrollView style={{ backgroundColor: 'white' }}
+                            showsVerticalScrollIndicator={false}>
+                            {/* list các thuyền viên có sẳn */}
+
+                            <View>
+
+                                <View>
+                                    <View style={styles.childContainer}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ width: 16, height: 16, marginRight: 5, marginTop: 13 }}>
+                                                    <MyCheckBox state={isSelect} setState={() => { setIsSelect(!isSelect) }} />
+                                                </View>
+                                                <Image source={icons.avatartv2} style={styles.imagecircle} />
+                                            </View>
+
+
+                                            <View>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <Text style={styles.title}>Sanji</Text>
+                                                    <Text style={styles.role}>Thuyền Viên</Text>
+                                                </View>
+
+                                                <Text style={styles.phone}>090 0000 090</Text>
+                                                <Text style={[styles.text, { width: '80%' }]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+                                </View>
+
+                                <View>
+                                    <View style={styles.childContainer}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ width: 16, height: 16, marginRight: 5, marginTop: 13 }}>
+                                                    <MyCheckBox state={isSelect} setState={() => { setIsSelect(!isSelect) }} />
+                                                </View>
+                                                <Image source={icons.avatartv2} style={styles.imagecircle} />
+                                            </View>
+
+
+                                            <View>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <Text style={styles.title}>Sanji</Text>
+                                                    <Text style={styles.role}>Thuyền Viên</Text>
+                                                </View>
+
+                                                <Text style={styles.phone}>090 0000 090</Text>
+                                                <Text style={[styles.text, { width: '80%' }]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+                                </View>
+
+                                <View>
+                                    <View style={styles.childContainer}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ width: 16, height: 16, marginRight: 5, marginTop: 13 }}>
+                                                    <MyCheckBox state={isSelect} setState={() => { setIsSelect(!isSelect) }} />
+                                                </View>
+                                                <Image source={icons.avatartv2} style={styles.imagecircle} />
+                                            </View>
+
+
+                                            <View>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <Text style={styles.title}>Sanji</Text>
+                                                    <Text style={styles.role}>Thuyền Viên</Text>
+                                                </View>
+
+                                                <Text style={styles.phone}>090 0000 090</Text>
+                                                <Text style={[styles.text, { width: '80%' }]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+                                </View>
+
+                                <View>
+                                    <View style={styles.childContainer}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ width: 16, height: 16, marginRight: 5, marginTop: 13 }}>
+                                                    <MyCheckBox state={isSelect} setState={() => { setIsSelect(!isSelect) }} />
+                                                </View>
+                                                <Image source={icons.avatartv2} style={styles.imagecircle} />
+                                            </View>
+
+
+                                            <View>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <Text style={styles.title}>Sanji</Text>
+                                                    <Text style={styles.role}>Thuyền Viên</Text>
+                                                </View>
+
+                                                <Text style={styles.phone}>090 0000 090</Text>
+                                                <Text style={[styles.text, { width: '80%' }]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+                                </View>
+
+                                <View>
+                                    <View style={styles.childContainer}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ width: 16, height: 16, marginRight: 5, marginTop: 13 }}>
+                                                    <MyCheckBox state={isSelect} setState={() => { setIsSelect(!isSelect) }} />
+                                                </View>
+                                                <Image source={icons.avatartv2} style={styles.imagecircle} />
+                                            </View>
+
+
+                                            <View>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <Text style={styles.title}>Sanji</Text>
+                                                    <Text style={styles.role}>Thuyền Viên</Text>
+                                                </View>
+
+                                                <Text style={styles.phone}>090 0000 090</Text>
+                                                <Text style={[styles.text, { width: '80%' }]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+                                </View>
+
+
+                            </View>
+
+                            <TouchableOpacity style={{ backgroundColor: '#005F94', borderRadius: 8, marginTop: 30, marginBottom: 25, paddingVertical: 10, paddingHorizontal: 25, alignSelf: 'center' }}>
+                                <Text style={{ color: 'white', fontWeight: 'bold' }}>Thêm thuyền viên</Text>
+                            </TouchableOpacity>
+
+                        </ScrollView>
+
+                    </View>
+
+                </View>
+
+            </Modal>
         </View>
     )
 }

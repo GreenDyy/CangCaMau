@@ -59,22 +59,10 @@ function ThongTinThuyenVienScreen({ navigation, route }) {
 
                 <View style={{ backgroundColor: 'white', borderRadius: 6, paddingTop: 30, paddingBottom: 15, paddingHorizontal: 12, marginTop: 20 }}>
 
-                    <MyTextInput header={'Họ và tên'} showButtonX={true} editable={true} />
-                    <MyTextInput header={'CMND/CCCD'} showButtonX={true} editable={false} />
-
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <MyTextInput header={'Ngày sinh'} editable={true} inputText={selectNgaySinh} isDay={true} />
-
-                        <TouchableOpacity style={{ alignSelf: 'center' }}
-                            onPress={() => {
-                                setShowCalendar(!showCalendar),
-                                    setCalendarFor('ngaysinh')
-
-                            }}>
-                            <Image source={icons.calendar} resizeMode="contain" style={{ height: 16, width: 16, position: 'absolute', right: 0 }} />
-                        </TouchableOpacity>
-                    </View>
-
+                    <MyTextInput header={'Họ và tên'} editable={true} type={'delete'} />
+                    <MyTextInput header={'CMND/CCCD'} editable={false} type={'delete'} />
+                    <MyTextInput header={'Ngày sinh'} editable={false} type={'calendar'} />
+                    <MyTextInput header={'Địa chỉ'} editable={false} type={'delete'} />
                     <MyTextInput header={'Phường/xã'} showButtonX={true} editable={false} />
                     {/* chọn quận */}
                     <View>
@@ -138,36 +126,23 @@ function ThongTinThuyenVienScreen({ navigation, route }) {
                 </View>
                 {/* vùng trắng thứ 2 */}
                 <View style={{ backgroundColor: 'white', borderRadius: 6, paddingTop: 30, paddingBottom: 15, paddingHorizontal: 12, marginTop: 20 }}>
-
-                    <MyTextInput header={'Giấy chứng nhận chuyên môn'} showButtonX={true} editable={true} />
-                    <MyTextInput header={'Cơ quan cấp'} showButtonX={true} editable={false} />
-
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <MyTextInput header={'Ngày cấp'} editable={true} inputText={selectNgayCap} isDay={true} />
-
-                        <TouchableOpacity style={{ alignSelf: 'center' }}
-                            onPress={() => {
-                                setShowCalendar(!showCalendar),
-                                    setCalendarFor('ngaycap')
-
-                            }}>
-                            <Image source={icons.calendar} resizeMode="contain" style={{ height: 16, width: 16, position: 'absolute', right: 0 }} />
-                        </TouchableOpacity>
-                    </View>
+                    <MyTextInput header={'Giấy chứng nhận chuyên môn'} type={'delete'} editable={true} />
+                    <MyTextInput header={'Cơ quan cấp'} type={'delete'} />
+                    <MyTextInput header={'Ngày cấp'} type={'calendar'} editable={false} />
                 </View>
 
                 {/* 2 bút dưới */}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                     <TouchableOpacity
                         style={{ backgroundColor: '#FFFFFF', borderRadius: 6, paddingVertical: 10, width: 165, alignItems: 'center' }}
-                      
+
                     >
                         <Text style={{ color: '#828282', fontWeight: 'bold' }}>Đóng</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={{ backgroundColor: '#005F94', borderRadius: 6, paddingVertical: 10, width: 165, alignItems: 'center' }}
-                      
+
                     >
                         <Text style={{ color: 'white', fontWeight: 'bold' }}>Cập nhật</Text>
                     </TouchableOpacity>

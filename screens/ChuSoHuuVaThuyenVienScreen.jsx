@@ -1,114 +1,141 @@
 import React, { useState } from "react";
 import {
     View,
-    Text,
     TouchableOpacity,
+    Text,
     Image,
-    ScrollView,
     StatusBar,
-    StyleSheet,
-    Modal,
+    ScrollView,
     TextInput,
-    Button,
+    FlatList,
+    Modal,
+    StyleSheet
 } from 'react-native'
 import { icons, images } from '../constants/manager'
 import MyTextInput from "../components/mytextinput";
-import { Calendar } from 'react-native-calendars';
-import SelectDropdown from 'react-native-select-dropdown'
 import MyCheckBox from "../components/mycheckbox";
+import SelectDropdown from 'react-native-select-dropdown'
 
-function ThuyenVienScreen({ navigation, route }) {
+const listquan = ['Bình Chánh', 'Bình Tân', 'Tân Phú']
+
+function ChuSoHuuVaThuyenVienScreen({ navigation }) {
     const [showPopUp, setShowPopUp] = useState(false)
     const [isSelect, setIsSelect] = useState(false)
-    return (
-        <View style={{ flex: 1 }}>
-            <StatusBar backgroundColor={'#459AC9'} barStyle={'light-content'} />
-            {/* header */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#459AC9', paddingTop: 5, paddingBottom: 17, paddingHorizontal: 12, height: 41 }}>
-                <TouchableOpacity
-                    onPress={() => navigation.goBack()}>
-                    <Image source={icons.back} style={{ tintColor: 'gray', height: 20, width: 20, tintColor: 'white' }} />
-                </TouchableOpacity>
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, borderRadius: 17, height: 30, backgroundColor: '#6AAED4', paddingLeft: 8, paddingRight: 21, paddingVertical: 9 }}>
-                    <Image source={icons.search} style={{ height: 18, width: 18, tintColor: 'white' }} />
-                    <TextInput style={{ flex: 1, height: 40, color: 'white' }} placeholder="Nhập tên thuyền viên, CMND/CCCD..." placeholderTextColor={'white'} />
-                </View>
+    return (
+        <View style={{ flex: 1, marginHorizontal: 12, marginTop: 5 }}>
+            {/* header */}
+            <StatusBar backgroundColor={'#F5F5F5'} barStyle={'dark-content'} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Image source={icons.back} style={{ width: 20, height: 20, tintColor: '#333333' }} />
+                </TouchableOpacity>
+                <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold', width: 190, textAlign: 'center' }}>Chủ sở hữu & thuyền viên</Text>
+                <View style={{ height: 10, width: 30 }} />
             </View>
             {/* body */}
-            <View>
-
-            </View>
-            {/* nút thêm */}
-            <TouchableOpacity style={{ marginTop: 20, marginBottom: 10, marginHorizontal: 12, backgroundColor: '#459AC9', borderRadius: 6, paddingHorizontal: 120, paddingVertical: 12, alignItems: 'center' }}
-                onPress={() => setShowPopUp(true)}>
-                <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center', width: 200 }}>Thêm thuyền viên</Text>
-            </TouchableOpacity>
-            {/* ds thuyền viên */}
             <ScrollView
-                showsVerticalScrollIndicator={false}>
-                {/* ô trắng 1 */}
-                <TouchableOpacity style={styles.childContainer}>
-
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 280 }}>
-                        <Image source={icons.avatartv1} style={styles.imagecircle} />
-
-                        <View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={styles.title}>Luffy</Text>
-                                <Text style={styles.role}>Thuyền Trưởng</Text>
+                contentContainerStyle={{ paddingBottom: 10 }}
+            >
+                <View>
+                    {/* Chủ sở hữu */}
+                    <Text style={styles.type}>Chủ sở hữu</Text>
+                    <TouchableOpacity style={styles.childContainer}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 280 }}>
+                            <Image source={icons.avatarchard} style={styles.imagecircle} />
+                            <View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.title}>Nguyễn Văn B</Text>
+                                    <Text style={styles.role}>Chủ tàu</Text>
+                                </View>
+                                <Text style={styles.phone}>090 0000 090</Text>
+                                <Text style={[styles.text, {}]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
                             </View>
-
-                            <Text style={styles.phone}>090 0000 090</Text>
-                            <Text style={[styles.text, {}]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
                         </View>
-                    </View>
-                    <Image source={icons.back} style={styles.backright} />
+                        <Image source={icons.back} style={styles.backright} />
+                    </TouchableOpacity>
 
-                </TouchableOpacity>
-                <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
-                {/* ô trắng 1 */}
-                <TouchableOpacity style={styles.childContainer}>
-
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 280 }}>
-                        <Image source={icons.avatartv2} style={styles.imagecircle} />
-
-                        <View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={styles.title}>Sanji</Text>
-                                <Text style={styles.role}>Thuyền Viên</Text>
-                            </View>
-
-                            <Text style={styles.phone}>090 0000 090</Text>
-                            <Text style={[styles.text, {}]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
-                        </View>
+                    {/* Thuyền viên */}
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={styles.type}>Thuyền viên (3)</Text>
+                        <Image source={icons.fill} style={{ width: 8, height: 6, marginLeft: 5, marginTop: 16 }} />
                     </View>
 
-                    <Image source={icons.back} style={styles.backright} />
+                    {/* nút thêm thuyền viên */}
+                    <TouchableOpacity style={{ backgroundColor: '#459AC9', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginBottom: 5 }}
+                    onPress={()=>setShowPopUp(true)}>
+                        <Text style={{ color: 'white', fontWeight: 'bold' }}>Thêm thuyền viên</Text>
+                    </TouchableOpacity>
 
-                </TouchableOpacity>
-                <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
-                {/* ô trắng 1 */}
-                <TouchableOpacity style={styles.childContainer}>
+                    {/* ô trắng 1 */}
+                    <TouchableOpacity style={styles.childContainer}>
 
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 280 }}>
-                        <Image source={icons.avatartv3} style={styles.imagecircle} />
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 280 }}>
+                            <Image source={icons.avatartv1} style={styles.imagecircle} />
 
-                        <View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={styles.title}>Ksante</Text>
-                                <Text style={styles.role}>Tổ Máy</Text>
+                            <View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.title}>Luffy</Text>
+                                    <Text style={styles.role}>Thuyền Trưởng</Text>
+                                </View>
+
+                                <Text style={styles.phone}>090 0000 090</Text>
+                                <Text style={[styles.text, {}]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
                             </View>
-
-                            <Text style={styles.phone}>090 0000 090</Text>
-                            <Text style={[styles.text, {}]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
                         </View>
-                    </View>
-                    <Image source={icons.back} style={styles.backright} />
-                </TouchableOpacity>
-                <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+                        <Image source={icons.deletered} style={{ height: 16, width: 16 }} />
+
+                    </TouchableOpacity>
+                    <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+                    {/* ô trắng 1 */}
+                    <TouchableOpacity style={styles.childContainer}>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 280 }}>
+                            <Image source={icons.avatartv2} style={styles.imagecircle} />
+
+                            <View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.title}>Sanji</Text>
+                                    <Text style={styles.role}>Thuyền Viên</Text>
+                                </View>
+
+                                <Text style={styles.phone}>090 0000 090</Text>
+                                <Text style={[styles.text, {}]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
+                            </View>
+                        </View>
+
+                        <Image source={icons.deletered} style={{ height: 16, width: 16 }} />
+
+                    </TouchableOpacity>
+                    <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+                    {/* ô trắng 1 */}
+                    <TouchableOpacity style={styles.childContainer}>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 280 }}>
+                            <Image source={icons.avatartv3} style={styles.imagecircle} />
+
+                            <View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.title}>Ksante</Text>
+                                    <Text style={styles.role}>Tổ Máy</Text>
+                                </View>
+
+                                <Text style={styles.phone}>090 0000 090</Text>
+                                <Text style={[styles.text, {}]}>Sào Lưới, Xã Khánh Bình Tây Bắc, Huyện Trần Văn Thời, Tỉnh Cà Mau</Text>
+                            </View>
+                        </View>
+
+                        <Image source={icons.deletered} style={{ height: 16, width: 16 }} />
+
+                    </TouchableOpacity>
+                </View>
 
             </ScrollView>
+            {/* footer */}
+            <TouchableOpacity style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 10, width: 173, alignSelf: 'center', alignItems: 'center', position: 'absolute', bottom: 37 }}
+                onPress={() => navigation.navigate('ThongTinChiTiet')}>
+                <Text style={{ color: '#005F94', fontWeight: 'bold' }}>Tiếp tục</Text>
+            </TouchableOpacity>
 
             {/* Popup hiện ds thuyền viên có sẳn */}
 
@@ -292,10 +319,10 @@ function ThuyenVienScreen({ navigation, route }) {
                 </View>
 
             </Modal>
+
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     childContainer: {
@@ -328,11 +355,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#005F94',
         fontWeight: 'bold',
-        marginTop: 10,
+        marginTop: 20,
         marginBottom: 5,
     },
     trangthai: {
-        backgroundColor: '#459AC9',
+        backgroundColor: 'orange',
         fontSize: 10,
         alignSelf: 'center',
         borderRadius: 8,
@@ -350,34 +377,11 @@ const styles = StyleSheet.create({
         width: 12,
         height: 12,
         tintColor: 'gray',
-        transform: [{ scaleX: -1 }],
-        marginTop: 3
+        transform: [{ scaleX: -1 }]
     },
     phone: {
         color: 'black',
-    },
-    touchableCheckBox: {
-        borderRadius: 4,
-        borderWidth: 1,
-        width: 15,
-        height: 15,
-        marginRight: 3,
-        borderColor: '#005F94',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
-    touchableCheckBoxChecked: {
-        borderRadius: 4,
-        borderWidth: 1,
-        width: 15,
-        height: 15,
-        marginRight: 3,
-        borderColor: '#005F94',
-        backgroundColor: '#005F94',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+    }
 })
 
-export default ThuyenVienScreen
+export default ChuSoHuuVaThuyenVienScreen

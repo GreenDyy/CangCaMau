@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity , StyleSheet} from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { icons, images } from '../constants/manager'
 
 
-const MyCheckBox = ({ text, state = false, setState = ()=> {} , color, fontWeight }) => (
+const MyCheckBox = ({
+    text,
+    state = false,
+    setState = () => { },
+    color,
+    fontWeight }) => (
     <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
         <TouchableOpacity style={state ? styles.touchableCheckBoxChecked : styles.touchableCheckBox}
             onPress={() => setState(!state)}

@@ -14,7 +14,7 @@ import {
 import { icons, images } from '../constants/manager'
 import MyTextInput from "../components/mytextinput";
 
-function ChiTietTauCaScreen({ navigation }) {
+function ThongTinChiTietScreen({ navigation }) {
     const [thuGonThongTinTau, setThuGonThongTinTau] = useState(false)
     const [thuGonThongSoKyThuat, setThuGonThongSoKyThuat] = useState(false)
     const [thuGonGiayChungNhan, setThuGonGiayChungNhan] = useState(false)
@@ -48,7 +48,7 @@ function ChiTietTauCaScreen({ navigation }) {
                         <Image source={icons.fill} style={{ width: 8, height: 6, marginLeft: 5 }} />
                     </TouchableOpacity>
 
-                    <View style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 20, paddingHorizontal: 12, marginBottom: 20 }}>
+                    <View style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 20, paddingHorizontal: 12 }}>
                         <MyTextInput header={'Số đăng ký'} />
                         <MyTextInput header={'Tên tàu'} />
                         <MyTextInput header={'Địa bàn đăng ký'} />
@@ -65,6 +65,9 @@ function ChiTietTauCaScreen({ navigation }) {
                         <MyTextInput header={'Khu vực hoạt động'} />
                         <MyTextInput header={'Đơn vị quản lý'} />
                     </View>
+                    <TouchableOpacity style={{ marginBottom: 20 }}>
+                        <Text style={{ color: '#FF820F', fontSize: 12, marginTop: 10, borderBottomWidth: 1, borderBottomColor: '#FF820F', width: 48, textAlign: 'center' }}>Cập nhật</Text>
+                    </TouchableOpacity>
                 </View>
 
                 {/* Thông số kỹ thuật*/}
@@ -74,7 +77,7 @@ function ChiTietTauCaScreen({ navigation }) {
                         <Image source={icons.fill} style={{ width: 8, height: 6, marginLeft: 5 }} />
                     </TouchableOpacity>
 
-                    <View style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 20, paddingHorizontal: 12, marginBottom: 20 }}>
+                    <View style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 20, paddingHorizontal: 12 }}>
                         <MyTextInput header={'Số lượng máy'} />
                         <MyTextInput header={'Tổng công suất'} />
                         <MyTextInput header={'Chiều dài Lmax(m)'} />
@@ -89,6 +92,9 @@ function ChiTietTauCaScreen({ navigation }) {
                         <MyTextInput header={'Sức chở tối đa (tấn)'} />
                         <MyTextInput header={'Tốc độ tự do (hải lý/h)'} />
                     </View>
+                    <TouchableOpacity style={{ marginBottom: 20 }}>
+                        <Text style={{ color: '#FF820F', fontSize: 12, marginTop: 10, borderBottomWidth: 1, borderBottomColor: '#FF820F', width: 48, textAlign: 'center' }}>Cập nhật</Text>
+                    </TouchableOpacity>
                 </View>
 
                 {/* Thông tin giấy chứng nhận*/}
@@ -98,7 +104,7 @@ function ChiTietTauCaScreen({ navigation }) {
                         <Image source={icons.fill} style={{ width: 8, height: 6, marginLeft: 5 }} />
                     </TouchableOpacity>
 
-                    <View style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 20, paddingHorizontal: 12, marginBottom: 20 }}>
+                    <View style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 20, paddingHorizontal: 12 }}>
                         <MyTextInput header={'Số giấy phép khai thác'} />
                         <MyTextInput header={'Ngày cấp GPKT'} />
                         <MyTextInput header={'Ngày hết hạn GPKT'} />
@@ -109,6 +115,9 @@ function ChiTietTauCaScreen({ navigation }) {
                         <MyTextInput header={'Đơn vị cấp GCNATKT'} />
                         <MyTextInput header={'Ngày cấp số giấy đăng ký tàu cá'} />
                     </View>
+                    <TouchableOpacity style={{ marginBottom: 20 }}>
+                        <Text style={{ color: '#FF820F', fontSize: 12, marginTop: 10, borderBottomWidth: 1, borderBottomColor: '#FF820F', width: 48, textAlign: 'center' }}>Cập nhật</Text>
+                    </TouchableOpacity>
                 </View>
 
                 {/* Thông tin thiết bị định vị*/}
@@ -118,18 +127,22 @@ function ChiTietTauCaScreen({ navigation }) {
                         <Image source={icons.fill} style={{ width: 8, height: 6, marginLeft: 5 }} />
                     </TouchableOpacity>
 
-                    <View style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 20, paddingHorizontal: 12, marginBottom: 20 }}>
+                    <View style={{ backgroundColor: 'white', borderRadius: 6, paddingVertical: 20, paddingHorizontal: 12 }}>
                         <MyTextInput header={'Nhà mạng cung cấp'} />
                         <MyTextInput header={'Seri'} />
                         <MyTextInput header={'Trạng thái'} />
                         <MyTextInput header={'Ngày đăng ký thiết bị'} />
                     </View>
+
+                    <TouchableOpacity style={{ marginBottom: 20 }}>
+                        <Text style={{ color: '#FF820F', fontSize: 12, marginTop: 10, borderBottomWidth: 1, borderBottomColor: '#FF820F', width: 48, textAlign: 'center' }}>Cập nhật</Text>
+                    </TouchableOpacity>
                 </View>
 
                 {/* File đính kèm*/}
                 <View>
                     <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
-                        <Text style={{ color: '#005F94', fontSize: 16, fontWeight: 'bold' }}>Thông tin thiết bị định vị</Text>
+                        <Text style={{ color: '#005F94', fontSize: 16, fontWeight: 'bold' }}>File đính kèm</Text>
                         <Image source={icons.fill} style={{ width: 8, height: 6, marginLeft: 5 }} />
                     </TouchableOpacity>
 
@@ -239,12 +252,12 @@ function ChiTietTauCaScreen({ navigation }) {
                         )
                     }
                 </View>
-                <TouchableOpacity onPress={()=>navigation.navigate('ThemThuyenVien')}>
+                <TouchableOpacity>
                     <Text style={{ color: '#FF820F', fontSize: 12, marginTop: 10, borderBottomWidth: 1, borderBottomColor: '#FF820F', width: 48, textAlign: 'center' }}>Cập nhật</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ backgroundColor: '#FFFFFF', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginTop: 20, marginBottom: 25, width: 175, alignSelf: 'center' }}
-                    onPress={() => navigation.goBack()}>
-                    <Text style={{ color: '#828282', fontWeight: 'bold' }}>Đóng</Text>
+                <TouchableOpacity style={{ backgroundColor: '#005F94', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginTop: 20, marginBottom: 25, width: 175, alignSelf: 'center' }}
+                    onPress={() => navigation.navigate('TauCa')}>
+                    <Text style={{ color: 'white', fontWeight: 'bold',  }}>Xác nhận</Text>
                 </TouchableOpacity>
 
             </ScrollView>
@@ -336,4 +349,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default ChiTietTauCaScreen
+export default ThongTinChiTietScreen

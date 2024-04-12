@@ -8,11 +8,11 @@ import {
     TextInput,
     StatusBar,
 } from 'react-native'
-import { images, icons } from '../constants/manager'
+import { images, icons } from '../../constants/manager'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-function ProfileScreen({ navigation }) {
+function CBProfileScreen({ navigation }) {
     const [userProfile, setUserProfile] = useState(null)
 
     useEffect(() => {
@@ -33,21 +33,20 @@ function ProfileScreen({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
-            <StatusBar backgroundColor={'#459AC9'} barStyle={'light-content'} />
-            <View style={{ backgroundColor: '#459AC9', paddingBottom: 17, paddingTop: 5 }}>
+            <StatusBar backgroundColor={'#3345CB'} barStyle={'light-content'} />
+            <View style={{ backgroundColor: '#3345CB', paddingBottom: 17, paddingTop: 5 }}>
                 <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center', fontSize: 16 }}>Cá nhân</Text>
             </View>
             {/* Tên chủ */}
             <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 15, backgroundColor: 'white', marginBottom: 5 }}
                 onPress={() => {
-                    navigation.navigate('InforProfile')
+                    navigation.navigate('CBThongTinCaNhan')
                 }}>
                 <View style={{ flexDirection: 'row' }}>
                     <Image source={userProfile ? userProfile.avatar : images.avatar} style={{ height: 48, width: 48 }} />
                     <View style={{ marginLeft: 10 }}>
                         <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}>{userProfile && userProfile.ten}</Text>
-                        <Text style={{ fontSize: 12 }}>{userProfile && userProfile.sdt}</Text>
-                        <Text style={{ fontSize: 12 }}>{userProfile && userProfile.chucvu}</Text>
+                        <Text style={{ fontSize: 12 }}>Trạm kiểm soát Rạch Tàu</Text>
                     </View>
                 </View>
 
@@ -56,7 +55,7 @@ function ProfileScreen({ navigation }) {
 
             <TouchableOpacity style={{ backgroundColor: 'white', marginTop: 2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 12 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image source={icons.version} style={{ height: 20, width: 20, marginRight: 5 }} />
+                    <Image source={icons.version} style={{ height: 20, width: 20, marginRight: 5, tintColor: '#3345CB' }} />
                     <Text style={{ color: 'black', fontSize: 16 }}>Phiên bản</Text>
                 </View>
                 <Text style={{ color: 'black' }}>2.0.1.1</Text>
@@ -64,7 +63,7 @@ function ProfileScreen({ navigation }) {
 
             <TouchableOpacity style={{ backgroundColor: 'white', marginTop: 2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 12 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image source={icons.guige} style={{ height: 20, width: 20, marginRight: 5 }} />
+                    <Image source={icons.guige} style={{ height: 20, width: 20, marginRight: 5, tintColor: '#3345CB' }} />
                     <Text style={{ color: 'black', fontSize: 16 }}>Giới thiệu và hướng dẫn</Text>
                 </View>
                 <Image source={icons.forward} style={{ height: 12, width: 12 }} />
@@ -72,7 +71,7 @@ function ProfileScreen({ navigation }) {
 
             <TouchableOpacity style={{ backgroundColor: 'white', marginTop: 2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 12 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image source={icons.setting} style={{ height: 20, width: 20, marginRight: 5 }} />
+                    <Image source={icons.setting} style={{ height: 20, width: 20, marginRight: 5, tintColor: '#3345CB' }} />
                     <Text style={{ color: 'black', fontSize: 16 }}>Cài đặt</Text>
                 </View>
                 <Image source={icons.forward} style={{ height: 12, width: 12 }} />
@@ -81,15 +80,15 @@ function ProfileScreen({ navigation }) {
             <TouchableOpacity style={{ backgroundColor: 'white', marginTop: 2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 12 }}
                 onPress={() => navigation.navigate('ChangePass')}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image source={icons.changepassword} style={{ height: 20, width: 20, marginRight: 5 }} />
+                    <Image source={icons.changepassword} style={{ height: 20, width: 20, marginRight: 5, tintColor: '#3345CB' }} />
                     <Text style={{ color: 'black', fontSize: 16 }}>Đổi mật khẩu</Text>
                 </View>
                 <Image source={icons.forward} style={{ height: 12, width: 12 }} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ marginTop: 20, marginHorizontal: 12, paddingVertical: 13, backgroundColor: 'white', borderRadius: 6 }}
+            <TouchableOpacity style={{ marginTop: 25, marginHorizontal: 12, paddingVertical: 13, backgroundColor: 'white', borderRadius: 6 }}
                 onPress={() => navigation.navigate('Login')}>
-                <Text style={{ textAlign: 'center', color: '#005F94', fontWeight: 'bold' }}>Đăng xuất</Text>
+                <Text style={{ textAlign: 'center', color: '#3345CB', fontWeight: 'bold' }}>Đăng xuất</Text>
             </TouchableOpacity>
 
         </View>
@@ -97,4 +96,4 @@ function ProfileScreen({ navigation }) {
     )
 }
 
-export default ProfileScreen
+export default CBProfileScreen

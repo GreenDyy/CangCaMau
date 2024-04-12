@@ -1,6 +1,5 @@
 import React from "react";
-import { Image } from 'react-native'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { Image, Text } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -34,9 +33,26 @@ import AllStateNhapBenScreen from "./AllStateNhapBenScreen";
 import TauCaScreen from "./TauCaScreen";
 import ChiTietTauCaScreen from "./ChiTietTauCaScreen";
 import ThongTinThuyenVienScreen from "./ThongTinThuyenVienScreen";
-import ThuyenVienScreen from "./ThuyenVienScreen";
 import ThemThuyenVienScreen from "./ThemThuyenVienScreen";
 import ThongTinTauScreen from "./ThongTinTauScreen";
+import ThongSoKyThuatScreen from "./ThongSoKyThuatScreen";
+import ThongTinGiayChungNhanScreen from "./ThongTInGiayChungNhanScreen";
+import ThongTinThietBiDinhViScreen from "./ThongTInThietBiDinhViScreen";
+import ChuSoHuuVaThuyenVienScreen from "./ChuSoHuuVaThuyenVienScreen";
+import ThongTinChiTietScreen from "./ThongTinChiTietScreen";
+import TabThuyenVienScreen from "./TabThuyenVienScreen";
+import ChiTietThuyenVienScreen from "./ChiTietThuyenVienScreen";
+import LocKetQuaThuyenVienScreen from "./LocKetQuaThuyenVienScreen";
+import LichSuViPhamScreen from "./LichSuViPhamScreen";
+import ChiTietViPhamScreen from "./ChiTietViPham";
+import LichSuTaiNanScreen from "./LichSuTaiNanScreen";
+import ChiTietTaiNanScreen from "./ChiTietTaiNan";
+import CanhBaoScreen from "./CanhBaoScreen";
+import XemThongTinTauScreen from "./XemThongTinTauScreen";
+//cán bộ
+import CBHomeScreen from "./CanBoScreens/CBHomeScreen";
+import CBProfileScreen from "./CanBoScreens/CBProfileScreen";
+import CBThongTinCaNhanScreen from "./CanBoScreens/CBThongTInCaNhan";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -78,7 +94,7 @@ function BottomTabHome() {
                     ),
                     tabBarLabel: ({ focused }) => (
                         <Text style={{
-                            color: '#005F94',
+                            color: '#3345CB',
                             fontSize: 12,
                             fontWeight: 'bold'
                         }}>
@@ -107,7 +123,7 @@ function BottomTabHome() {
                     ),
                     tabBarLabel: ({ focused }) => (
                         <Text style={{
-                            color: '#005F94',
+                            color: '#3345CB',
                             fontSize: 12,
                             fontWeight: 'bold'
                         }}>
@@ -136,7 +152,115 @@ function BottomTabHome() {
                     ),
                     tabBarLabel: ({ focused }) => (
                         <Text style={{
-                            color: '#005F94',
+                            color: '#3345CB',
+                            fontSize: 12,
+                            fontWeight: 'bold'
+                        }}>
+                            {focused ? 'Cá nhân' : ''}
+                        </Text>
+                    )
+                }}
+            />
+        </Tab.Navigator>
+    )
+}
+//của cán bộ
+function BottomTabCBHome() {
+    return (
+        <Tab.Navigator
+            initialRouteName='TabCBHome'
+            screenOptions={{
+                headerShown: false,
+                tabBarStyle: {
+                    padding: 10,
+                    height: 70,
+                    borderTopLeftRadius: 40,
+                    borderTopRightRadius: 40,
+                    position: 'absolute',
+                    bottom: 0
+                },
+                tabBarHideOnKeyboard: 'true'
+            }}
+        >
+            <Tab.Screen
+                name="TabHome"
+                component={CBHomeScreen}
+                options={{
+                    tabBarLabelPosition: 'beside-icon',
+                    tabBarItemStyle: {
+                        justifyContent: 'space-evenly',
+                    },
+                    tabBarIcon: ({ focused }) => (
+                        <Image
+                            source={icons.home}
+                            style={{
+                                tintColor: focused ? '#00CC00' : 'black',
+                                height: 25,
+                                width: 25
+                            }}
+                        />
+                    ),
+                    tabBarLabel: ({ focused }) => (
+                        <Text style={{
+                            color: '#3345CB',
+                            fontSize: 12,
+                            fontWeight: 'bold'
+                        }}>
+                            {focused ? 'Trang chủ' : ''}
+                        </Text>
+                    )
+                }}
+            />
+            <Tab.Screen
+                name="TabNotification"
+                component={NotificationScreen}
+                options={{
+                    tabBarLabelPosition: 'beside-icon',
+                    tabBarItemStyle: {
+                        justifyContent: 'space-evenly',
+                    },
+                    tabBarIcon: ({ focused }) => (
+                        <Image
+                            source={icons.notification}
+                            style={{
+                                tintColor: focused ? '#00CC00' : 'black',
+                                height: 25,
+                                width: 25
+                            }}
+                        />
+                    ),
+                    tabBarLabel: ({ focused }) => (
+                        <Text style={{
+                            color: '#3345CB',
+                            fontSize: 12,
+                            fontWeight: 'bold'
+                        }}>
+                            {focused ? 'Thông báo' : ''}
+                        </Text>
+                    )
+                }}
+            />
+            <Tab.Screen
+                name="TabProfile"
+                component={CBProfileScreen}
+                options={{
+                    tabBarLabelPosition: 'beside-icon',
+                    tabBarItemStyle: {
+                        justifyContent: 'space-evenly',
+                    },
+                    tabBarIcon: ({ focused }) => (
+                        <Image
+                            source={icons.profile}
+                            style={{
+                                tintColor: focused ? '#00CC00' : 'black',
+                                height: 25,
+                                width: 25
+                            }}
+                        />
+                    ),
+                    tabBarLabel: ({ focused }) => (
+                        <Text style={{
+                            color: '#3345CB',
                             fontSize: 12,
                             fontWeight: 'bold'
                         }}>
@@ -179,9 +303,25 @@ function App() {
                 <Stack.Screen name='TauCa' component={TauCaScreen} />
                 <Stack.Screen name='ChiTietTauCa' component={ChiTietTauCaScreen} />
                 <Stack.Screen name='ThongTinThuyenVien' component={ThongTinThuyenVienScreen} />
-                <Stack.Screen name='ThuyenVien' component={ThuyenVienScreen} />
                 <Stack.Screen name='ThemThuyenVien' component={ThemThuyenVienScreen} />
                 <Stack.Screen name='ThongTinTau' component={ThongTinTauScreen} />
+                <Stack.Screen name='ThongSoKyThuat' component={ThongSoKyThuatScreen} />
+                <Stack.Screen name='ThongTinGiayChungNhan' component={ThongTinGiayChungNhanScreen} />
+                <Stack.Screen name='ThongTinThietBiDinhVi' component={ThongTinThietBiDinhViScreen} />
+                <Stack.Screen name='ChuSoHuuVaThuyenVien' component={ChuSoHuuVaThuyenVienScreen} /> 
+                <Stack.Screen name='ThongTinChiTiet' component={ThongTinChiTietScreen} />
+                <Stack.Screen name='TabThuyenVien' component={TabThuyenVienScreen} />
+                <Stack.Screen name='ChiTietThuyenVien' component={ChiTietThuyenVienScreen} />
+                <Stack.Screen name='LocKetQuaThuyenVien' component={LocKetQuaThuyenVienScreen} />
+                <Stack.Screen name='LichSuViPham' component={LichSuViPhamScreen} />
+                <Stack.Screen name='ChiTietViPham' component={ChiTietViPhamScreen} />
+                <Stack.Screen name='LichSuTaiNan' component={LichSuTaiNanScreen} />
+                <Stack.Screen name='ChiTietTaiNan' component={ChiTietTaiNanScreen} />
+                <Stack.Screen name='CanhBao' component={CanhBaoScreen} />
+                <Stack.Screen name='XemThongTinTau' component={XemThongTinTauScreen} />
+                {/* cán bộ */}
+                <Stack.Screen name='CBHome' component={BottomTabCBHome} />
+                <Stack.Screen name='CBThongTinCaNhan' component={CBThongTinCaNhanScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
