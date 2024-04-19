@@ -16,20 +16,20 @@ function LoginScreen({ navigation }) {
         pass: '1',
         ten: 'Huỳnh Khánh Duy',
         loaithuyenvien: 'Thuyền trưởng',
-        chucvu: 'Chủ tàu',
+        chucvu: 'Cán bộ',
         sdt: '0767237493',
         ngaysinh: '1/09/2002',
         ngaycap: '30/09/2024',
         avatar: images.avatar1,
     }
 
-    const handleLogin = async (screen) => {
+    const handleLogin = async (screen, role) => {
         try {
             await AsyncStorage.setItem('myProfile', JSON.stringify(myProfile))
             // Alert.alert('Thông báo', 'Đăng nhập thành công')
             navigation.navigate(screen);
         }
-        catch(e) {
+        catch (e) {
             console.log('Lỗi đăng nhập')
             Alert.alert('Error', 'lỗi đăng nhập')
         }
@@ -89,7 +89,7 @@ function LoginScreen({ navigation }) {
                                 onChangeText={(textInput) => {
                                     textInput.length <= 10 ? setText(textInput) : null
                                 }} />
-                            <TextInput style={styles.textInput} placeholder="Mật khẩu" autoCapitalize="none" secureTextEntry={true} placeholderTextColor={'#005F94'}/>
+                            <TextInput style={styles.textInput} placeholder="Mật khẩu" autoCapitalize="none" secureTextEntry={true} placeholderTextColor={'#005F94'} />
                         </View>
 
                         <View>

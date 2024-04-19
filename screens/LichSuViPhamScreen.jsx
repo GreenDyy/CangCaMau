@@ -98,7 +98,7 @@ function LichSuViPhamScreen({ navigation }) {
                 showsVerticalScrollIndicator={false}
             >
                 {
-                    DATAVIPHAMEMPTY.length > 0 ?
+                    DATAVIPHAM.length > 0 ?
                         DATAVIPHAM.map((item, index) => (
                             <MyItem key={index} tieude={item.tieude} trangthai={item.trangthai} ngaygui={item.ngaygui} ngaybibat={item.ngaybibat} noidung={item.noidung} isNew={item.isNew} />
                         )) :

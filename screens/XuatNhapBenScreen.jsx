@@ -13,6 +13,10 @@ import {
     XuatBen, NhapBen, TrongBo, NgoaiBien, ChoXacNhanNhapBen, ChoXacNhanXuatBen,
     DuocTiepNhan, TuChoi, ChoTiepNhanYeuCau, KhongDuocNhapBen, KhongDuocXuatBen
 } from '../components/status'
+import SelectDropdown from "react-native-select-dropdown";
+// for dropdown
+const DSTINHTRANG = ['Tất cả tình trạng', 'Trong bờ', 'Ngoài biển']
+const DSHANDANGKIEM = ['Tất cả', 'Hết hạn', 'Gần hết hạn', 'Còn hạng']
 
 const tabs = ['Danh sách', 'Lịch sử yêu cầu']
 const DANHSACH = [
@@ -207,26 +211,29 @@ function XuatNhapBenScreen({ navigation }) {
 
             </View>
 
-            <View style={{ margin: 10 }}>
-                {/* 2 nút */}
-                <View style={{ flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: '#F5F5F5' }}>
-                    {
-                        tabs.map((tab, index) => (
-                            <TouchableOpacity key={index}
-                                onPress={() => setTypeTab(tab)}>
-                                <Text style={{
-                                    fontSize: 14,
-                                    fontWeight: 'bold',
-                                    marginLeft: index != 0 ? 20 : 0,
-                                    color: typeTab === tab ? '#005F94' : '#ADADAD',
-                                    borderBottomWidth: typeTab === tab ? 1 : 0
-                                }}>{tab}</Text>
-                            </TouchableOpacity>
-                        ))
+            {
+                !showSearchBar &&
+                <View style={{ margin: 10 }}>
+                    {/* 2 nút */}
+                    <View style={{ flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: '#F5F5F5' }}>
+                        {
+                            tabs.map((tab, index) => (
+                                <TouchableOpacity key={index}
+                                    onPress={() => setTypeTab(tab)}>
+                                    <Text style={{
+                                        fontSize: 14,
+                                        fontWeight: 'bold',
+                                        marginLeft: index != 0 ? 20 : 0,
+                                        color: typeTab === tab ? '#005F94' : '#ADADAD',
+                                        borderBottomWidth: typeTab === tab ? 1 : 0
+                                    }}>{tab}</Text>
+                                </TouchableOpacity>
+                            ))
 
-                    }
+                        }
+                    </View>
                 </View>
-            </View>
+            }
 
             {typeTab === 'Danh sách' && (
                 <ScrollView style={{ flex: 1 }}>
@@ -288,26 +295,80 @@ function XuatNhapBenScreen({ navigation }) {
                 <View style={{ flex: 1 }}>
                     {
                         showSearchBar && (
-                            <View style={{ flexDirection: 'row' }}>
-                                <TouchableOpacity style={{ borderWidth: 1, height: 25, width: 48, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 12 }}
+                            <View style={{ flexDirection: 'row', paddingTop: 15, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: '#D6D6D6' }}>
+                                <TouchableOpacity style={{ borderWidth: 1, width: 48, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 12, padding: 5 }}
                                     onPress={() => {
-                                        navigation.navigate('LocKetQua')
+                                        navigation.navigate('CBLocKetQua')
                                     }}>
                                     <Image source={icons.filter} style={{ width: 14, height: 14 }} />
-                                    <Text style={{ color: 'black', fontSize: 12 }}>Lọc</Text>
+                                    <Text style={{ color: 'black', fontSize: 12, marginLeft: 3 }}>Lọc</Text>
                                 </TouchableOpacity>
 
-                                <TouchableOpacity style={{ borderWidth: 1, height: 25, width: 116, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 5 }}>
-                                    <Text style={{ color: 'black', fontSize: 12, marginRight: 3 }}>Tất cả tình trạng</Text>
-                                    <Image source={icons.dropdown} style={{ width: 10, height: 6 }} />
-                                </TouchableOpacity>
 
-                                <TouchableOpacity style={{ borderWidth: 1, height: 25, width: 108, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 5 }}>
-                                    <Text style={{ color: 'black', fontSize: 12, marginRight: 3 }}>Tất cả thao tác</Text>
-                                    <Image source={icons.dropdown} style={{ width: 10, height: 6 }} />
-                                </TouchableOpacity>
+                                {/* tình trạng */}
+                                <SelectDropdown
+                                    dropdownStyle={{ borderRadius: 6 }}
+                                    defaultValueByIndex={0}
+                                    data={DSTINHTRANG}
+                                    onSelect={(selectedItem, index) => {
+                                        setTinhTrangDuyet(selectedItem)
+                                    }}
+                                    renderButton={(selectedItem, isOpened) => {
+                                        return (
+                                            !selectedItem ?
+                                                <View style={{ marginLeft: 5, borderWidth: 1, width: 116, borderRadius: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5 }}>
+                                                    <Text style={{ color: 'black', fontSize: 12, marginRight: 3 }}>Tất cả tình trạng</Text>
+                                                    <Image source={icons.dropdown} style={{ width: 10, height: 6 }} />
+                                                </View>
+                                                :
+                                                <View style={{ marginLeft: 5, borderWidth: 1, width: 116, borderRadius: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5 }}
+                                                    onPress={() => setLoc(true)}>
+                                                    <Text style={{ color: 'black', fontSize: 12, marginRight: 3 }}>{selectedItem}</Text>
+                                                    <Image source={icons.dropdown} style={{ width: 10, height: 6 }} />
+                                                </View>
+                                        );
+                                    }}
+                                    renderItem={(item, index, isSelected) => {
+                                        return (
+                                            <View style={{ padding: 5, backgroundColor: isSelected && 'lightgreen' }}>
+                                                <Text style={{ borderBottomWidth: 1, fontSize: 12 }}>{item}</Text>
+                                            </View>
+                                        );
+                                    }}
+                                />
 
-                                <TouchableOpacity style={{ paddingHorizontal: 5, height: 25, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 5, backgroundColor: '#D6D6D6' }}>
+                                {/* hạn đăng kiểm */}
+                                <SelectDropdown
+                                    dropdownStyle={{ borderRadius: 6 }}
+                                    data={DSHANDANGKIEM}
+                                    defaultValueByIndex={0}
+                                    onSelect={(selectedItem, index) => {
+                                        setHanDangKiem(selectedItem)
+                                    }}
+                                    renderButton={(selectedItem, isOpened) => {
+                                        return (
+                                            !selectedItem ?
+                                                <View style={{ marginLeft: 5, borderWidth: 1, width: 116, borderRadius: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5 }}>
+                                                    <Text style={{ color: 'black', fontSize: 12 }}>Tất cả</Text>
+                                                    <Image source={icons.dropdown} style={{ width: 10, height: 6 }} />
+                                                </View>
+                                                :
+                                                <View style={{ marginLeft: 5, borderWidth: 1, width: 116, borderRadius: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5 }}
+                                                    onPress={() => setLoc(true)}>
+                                                    <Text style={{ color: 'black', fontSize: 12, marginRight: 3 }}>{selectedItem}</Text>
+                                                    <Image source={icons.dropdown} style={{ width: 10, height: 6 }} />
+                                                </View>
+                                        );
+                                    }}
+                                    renderItem={(item, index, isSelected) => {
+                                        return (
+                                            <View style={{ padding: 5, backgroundColor: isSelected && 'lightgreen' }}>
+                                                <Text style={{ borderBottomWidth: 1, fontSize: 12 }}>{item}</Text>
+                                            </View>
+                                        );
+                                    }}
+                                />
+                                <TouchableOpacity style={{ padding: 5, borderRadius: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 5, backgroundColor: '#D6D6D6' }}>
                                     <Image source={icons.calendar} style={{ width: 14, height: 14 }} resizeMode="contain" />
                                     <Text style={{ color: 'black', fontSize: 12 }}>Thời gian</Text>
                                 </TouchableOpacity>
@@ -316,8 +377,7 @@ function XuatNhapBenScreen({ navigation }) {
                     }
 
 
-                    <ScrollView contentContainerStyle={{ paddingTop: 10 }}>
-                        <View style={{ borderBottomWidth: 0.5, marginLeft: 10, borderColor: '#D6D6D6' }} />
+                    <ScrollView>
                         <View>
                             <TouchableOpacity style={{ margin: 10 }} onPress={() => { navigation.navigate('AllStateXuatBenScreen') }}>
                                 <View style={{ flexDirection: 'row', justifyContent: "space-between", flex: 1, alignItems: 'center' }}>

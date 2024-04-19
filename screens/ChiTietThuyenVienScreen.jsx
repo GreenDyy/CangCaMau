@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     Text,
@@ -6,13 +6,11 @@ import {
     Image,
     ScrollView,
     StatusBar,
-    StyleSheet,
     Modal,
-    TextInput,
 } from 'react-native'
 import { icons, images } from '../constants/manager'
 import MyTextInput from "../components/mytextinput";
-import { Calendar } from 'react-native-calendars';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import SelectDropdown from 'react-native-select-dropdown'
 
 const listquan = ['Bình Chánh', 'Bình Tân', 'Tân Phú']
@@ -58,12 +56,15 @@ function ChiTietThuyenVienScreen({ navigation, route }) {
                         <View style={{ alignSelf: 'center' }}>
                             <View style={{ borderRadius: 999 }}>
                                 <Image source={icons.avatartv1} style={{ height: 80, width: 80 }} />
+                                <Text style={{ fontSize: 10, color: 'white', textAlign: 'center', paddingVertical: 2, paddingHorizontal: 4, backgroundColor: '#4DBFFF', borderRadius: 2, marginTop: 5 }}>
+                                    Rạng đông 1
+                                </Text>
                             </View>
                         </View>
                     )
                 }
 
-                <View style={{ backgroundColor: 'white', borderRadius: 6, paddingTop: 30, paddingBottom: 15, paddingHorizontal: 12, marginTop: 20 }}>
+                <View style={{ backgroundColor: 'white', borderRadius: 6, paddingTop: 30, paddingBottom: 15, paddingHorizontal: 12, marginTop: 10 }}>
 
                     <MyTextInput
                         header={'Họ và tên'}

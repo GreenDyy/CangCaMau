@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     Text,
@@ -11,10 +11,10 @@ import {
     TextInput,
     Button,
 } from 'react-native'
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { icons, images } from '../constants/manager'
 import { XuatBen, NhapBen, TrongBo, NgoaiBien, ChoXacNhanNhapBen, ChoXacNhanXuatBen, DuocTiepNhan, TuChoi, ChoTiepNhanYeuCau, KhongDuocNhapBen, KhongDuocXuatBen } from '../components/status'
-
+import MyTextInput from "../components/mytextinput";
 dataImage = [images.xb1, images.xb2, images.xb3, images.xb3, images.xb3, images.xb3]
 
 function AllStateNhapBenScreen({ navigation, route }) {
@@ -25,6 +25,24 @@ function AllStateNhapBenScreen({ navigation, route }) {
     const [thuGonHinhAnh, setThuGonHinhAnh] = useState(false)
     const [thuGonTatCa, setThuGonTatCa] = useState(false)
     const [thuGonViTri, setThuGonViTri] = useState(false)
+    const [userProfile, setUserProfile] = useState(null)
+    const [hanhDong, setHanhDong] = useState(0)
+
+    useEffect(() => {
+        console.log('Idle Home')
+        const getProfile = async () => {
+            try {
+                const myData = await AsyncStorage.getItem('myProfile')
+                const parseMyData = myData != null ? JSON.parse(myData) : null
+                setUserProfile(parseMyData)
+            }
+            catch (e) {
+                console.error('Lỗi khi get data từ AsyncStorage: ', e);
+                Alert.alert('Error', 'Lỗi khi get data từ AsyncStorage');
+            }
+        }
+        getProfile()
+    }, [])
 
     return (
         <View style={{ flex: 1, paddingHorizontal: 12 }}>
@@ -450,10 +468,62 @@ function AllStateNhapBenScreen({ navigation, route }) {
                                 )
                             }
 
-                            <TouchableOpacity style={{ backgroundColor: '#FFFFFF', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginTop: 20, marginBottom: 25, width: 175, alignSelf: 'center' }}
-                                onPress={() => navigation.goBack()}>
-                                <Text style={{ color: '#828282', fontWeight: 'bold' }}>Đóng</Text>
-                            </TouchableOpacity>
+                            {
+                                (userProfile && userProfile.chucvu) === 'Cán bộ' ?
+                                    (
+                                        <View>
+                                            <Text style={{ color: '#005F94', fontSize: 16, fontWeight: 'bold', marginTop: 20, marginBottom: 5 }}>HÀNH ĐỘNG XỬ LÝ</Text>
+                                            {/* card */}
+                                            <View style={{ borderRadius: 6, backgroundColor: 'white' }}>
+                                                {/* radio button */}
+                                                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 12 }}
+                                                    onPress={() => setHanhDong(1)}>
+                                                    {hanhDong === 1 ? <Image source={icons.radioVang} style={{ width: 16, height: 16 }} />
+                                                        :
+                                                        <View style={{ borderRadius: 999, width: 16, height: 16, backgroundColor: '#D6D6D6' }} />}
+                                                    <Text style={{ fontSize: 16, color: '#FFC737', fontWeight: 500, marginLeft: 5 }}>Được tiếp nhận</Text>
+                                                </TouchableOpacity>
+
+                                                <View style={{ borderBottomWidth: 1, borderBottomColor: '#D6D6D6', marginLeft: 12 }} />
+
+                                                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 12 }}
+                                                    onPress={() => setHanhDong(-1)}>
+                                                    {hanhDong === -1
+                                                        ? <Image source={icons.radioDo} style={{ width: 16, height: 16 }} />
+                                                        :
+                                                        <View style={{ borderRadius: 999, width: 16, height: 16, backgroundColor: '#D6D6D6' }} />}
+                                                    <Text style={{ fontSize: 16, color: '#F62825', fontWeight: 500, marginLeft: 5 }}>Từ chối</Text>
+                                                </TouchableOpacity>
+
+                                                {hanhDong === -1 && <View style={{ paddingBottom: 20, paddingHorizontal: 12 }}>
+                                                    <MyTextInput header={'Lý do'} />
+                                                </View>}
+
+                                            </View>
+                                            {/* hỏi ý cấp trên */}
+                                            <TouchableOpacity style={{ width: 135 }}>
+                                                <Text style={{ color: '#3345CB', fontWeight: 700, marginTop: 10, borderBottomWidth: 1, borderBottomColor: '#3345CB' }}>Hỏi ý kiến cấp trên {'>>'}</Text>
+                                            </TouchableOpacity>
+
+                                            {/* 2 nút  */}
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 20, paddingTop: 25 }}>
+                                                <TouchableOpacity style={{ borderRadius: 6, backgroundColor: '#FFFFFF', paddingHorizontal: 60, paddingVertical: 10 }}>
+                                                    <Text style={{ fontWeight: 700 }}>Đóng</Text>
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity style={{ borderRadius: 6, backgroundColor: '#3345CB', paddingHorizontal: 60, paddingVertical: 10 }}>
+                                                    <Text style={{ fontWeight: 700, color: 'white' }}>Xác nhận</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View>
+
+                                    )
+                                    :
+                                    <TouchableOpacity style={{ backgroundColor: '#FFFFFF', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginTop: 20, marginBottom: 25, width: 175, alignSelf: 'center' }}
+                                        onPress={() => navigation.goBack()}>
+                                        <Text style={{ color: '#828282', fontWeight: 'bold' }}>Đóng</Text>
+                                    </TouchableOpacity>
+                            }
                         </View>
                     )
                 }

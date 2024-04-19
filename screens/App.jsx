@@ -52,7 +52,31 @@ import XemThongTinTauScreen from "./XemThongTinTauScreen";
 //cán bộ
 import CBHomeScreen from "./CanBoScreens/CBHomeScreen";
 import CBProfileScreen from "./CanBoScreens/CBProfileScreen";
-import CBThongTinCaNhanScreen from "./CanBoScreens/CBThongTInCaNhan";
+import CBThongTinCaNhanScreen from "./CanBoScreens/CBThongTinCaNhan";
+import YeuCauXuatNhapBenScreen from "./CanBoScreens/YeuCauXuatNhapBenScreen";
+import CBDanhSachTauCaScreen from "./CanBoScreens/CBDanhSachTauCaScreen";
+import CBLocKetQuaScreen from "./CanBoScreens/CBLocKetQuaScreen";
+import CBDanhSachThuyenVienScreen from "./CanBoScreens/CBDanhSachThuyenVienScreen";
+import CBChiTietThuyenVienScreen from "./CanBoScreens/CBChiTietThuyenVienScreen";
+import CBLichSuViPhamScreen from "./CanBoScreens/CBLichSuViPhamScreen";
+import CBLocViPhamScreen from "./CanBoScreens/CBLocViPhamScreen";
+import CBChiTietViPhamScreen from "./CanBoScreens/CBChiTietViPham";
+import ThemMoiViPhamScreen from "./CanBoScreens/ThemMoiViPhamScreen";
+import CBDanhSachTaiNanScreen from "./CanBoScreens/CBDanhSachTaiNanScreen";
+import CBLocTaiNanScreen from "./CanBoScreens/CBLocTaiNanScreen";
+import CBChiTietTaiNanScreen from "./CanBoScreens/CBChiTietTaiNan";
+import ThemMoiTaiNanScreen from "./CanBoScreens/ThemMoiTaiNanScreen";
+import CBDanhSachThongBaoScreen from "./CanBoScreens/CBDanhSachThongBaoScreen";
+import CBChiTietThongBaoScreen from "./CanBoScreens/CBChiTietThongBao";
+import ThemMoiThongBaoScreen from "./CanBoScreens/ThemMoiThongBaoScreen";
+import CBHoiYKienCapTrenScreen from "./CanBoScreens/CBHoiYKienCapTrenScreen";
+import CBChiTietYKienScreen from "./CanBoScreens/CBChiTietYKien";
+import ThemMoiYKienScreen from "./CanBoScreens/ThemMoiYKienScreen";
+import CBPhanHoiYKienScreen from "./CanBoScreens/CBPhanHoiYKienScreen";
+import CBLocYKienScreen from "./CanBoScreens/CBLocYKienScreen";
+import CBDanhSachCangScreen from "./CanBoScreens/CBDanhSachCangScreen";
+import ChiTietBenScreen from "./CanBoScreens/ChiTietBenScreen";
+import CBChiTietTauCaScreen from "./CanBoScreens/CBChiTietTauCaScreen";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -308,7 +332,7 @@ function App() {
                 <Stack.Screen name='ThongSoKyThuat' component={ThongSoKyThuatScreen} />
                 <Stack.Screen name='ThongTinGiayChungNhan' component={ThongTinGiayChungNhanScreen} />
                 <Stack.Screen name='ThongTinThietBiDinhVi' component={ThongTinThietBiDinhViScreen} />
-                <Stack.Screen name='ChuSoHuuVaThuyenVien' component={ChuSoHuuVaThuyenVienScreen} /> 
+                <Stack.Screen name='ChuSoHuuVaThuyenVien' component={ChuSoHuuVaThuyenVienScreen} />
                 <Stack.Screen name='ThongTinChiTiet' component={ThongTinChiTietScreen} />
                 <Stack.Screen name='TabThuyenVien' component={TabThuyenVienScreen} />
                 <Stack.Screen name='ChiTietThuyenVien' component={ChiTietThuyenVienScreen} />
@@ -322,6 +346,30 @@ function App() {
                 {/* cán bộ */}
                 <Stack.Screen name='CBHome' component={BottomTabCBHome} />
                 <Stack.Screen name='CBThongTinCaNhan' component={CBThongTinCaNhanScreen} />
+                <Stack.Screen name='YeuCauXuatNhapBen' component={YeuCauXuatNhapBenScreen} />
+                <Stack.Screen name='CBDanhSachTauCa' component={CBDanhSachTauCaScreen} />
+                <Stack.Screen name='CBLocKetQua' component={CBLocKetQuaScreen} />
+                <Stack.Screen name='CBDanhSachThuyenVien' component={CBDanhSachThuyenVienScreen} />
+                <Stack.Screen name='CBChiTietThuyenVien' component={CBChiTietThuyenVienScreen} />
+                <Stack.Screen name='CBLichSuViPham' component={CBLichSuViPhamScreen} />
+                <Stack.Screen name='CBLocViPham' component={CBLocViPhamScreen} />
+                <Stack.Screen name='CBChiTietViPham' component={CBChiTietViPhamScreen} />
+                <Stack.Screen name='ThemMoiViPham' component={ThemMoiViPhamScreen} />
+                <Stack.Screen name='CBDanhSachTaiNan' component={CBDanhSachTaiNanScreen} />
+                <Stack.Screen name='CBLocTaiNan' component={CBLocTaiNanScreen} />
+                <Stack.Screen name='CBChiTietTaiNan' component={CBChiTietTaiNanScreen} />
+                <Stack.Screen name='ThemMoiTaiNan' component={ThemMoiTaiNanScreen} />
+                <Stack.Screen name='CBDanhSachThongBao' component={CBDanhSachThongBaoScreen} />
+                <Stack.Screen name='CBChiTietThongBao' component={CBChiTietThongBaoScreen} />
+                <Stack.Screen name='ThemMoiThongBao' component={ThemMoiThongBaoScreen} />
+                <Stack.Screen name='CBHoiYKienCapTren' component={CBHoiYKienCapTrenScreen} />
+                <Stack.Screen name='CBChiTietYKien' component={CBChiTietYKienScreen} />
+                <Stack.Screen name='ThemMoiYKien' component={ThemMoiYKienScreen} />
+                <Stack.Screen name='CBPhanHoiYKien' component={CBPhanHoiYKienScreen} />
+                <Stack.Screen name='CBLocYKien' component={CBLocYKienScreen} />
+                <Stack.Screen name='CBDanhSachCang' component={CBDanhSachCangScreen} />
+                <Stack.Screen name='ChiTietBen' component={ChiTietBenScreen} />
+                <Stack.Screen name='CBChiTietTauCa' component={CBChiTietTauCaScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

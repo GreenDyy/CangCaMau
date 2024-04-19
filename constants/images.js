@@ -28,4 +28,5 @@ export default {
     thongbao: require('../assests/images/thongbao.png'),
     hoiykien: require('../assests/images/hoiykien.png'),
     tracuuben: require('../assests/images/tracuuben.png'),
+   avatarnullwhite: require('../assests/images/avatarnullwhite.png'),
 }

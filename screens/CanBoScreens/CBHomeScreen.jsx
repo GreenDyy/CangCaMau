@@ -10,42 +10,42 @@ const DATA = [
     {
         title: 'Yêu cầu Xuất/Nhập bến',
         image: images.xuatnhapbencb,
-        screen: 'XuatNhapBen'
+        screen: 'YeuCauXuatNhapBen'
     },
     {
         title: 'Tàu cá',
         image: images.taucacb,
-        screen: 'TauCa'
+        screen: 'CBDanhSachTauCa'
     },
     {
         title: 'Thuyền viên',
         image: images.thuyenviencb,
-        screen: 'TabThuyenVien'
+        screen: 'CBDanhSachThuyenVien'
     },
     {
         title: 'Vi phạm',
         image: images.viphamcb,
-        screen: 'LichSuViPham'
+        screen: 'CBLichSuViPham'
     },
     {
         title: 'Tai nạn',
         image: images.tainan,
-        screen: 'LichSuTaiNan'
+        screen: 'CBDanhSachTaiNan'
     },
     {
         title: 'Thông báo',
         image: images.thongbao,
-        screen: 'CanhBao'
+        screen: 'CBDanhSachThongBao'
     },
     {
         title: 'Hỏi ý kiến cấp trên',
         image: images.hoiykien,
-        screen: 'CanhBao'
+        screen: 'CBHoiYKienCapTren'
     },
     {
         title: 'Tra cứu bến',
         image: images.tracuuben,
-        screen: 'CanhBao'
+        screen: 'CBDanhSachCang'
     },
 ]
 // ((id-id%2)/2)%2==0
@@ -72,7 +72,6 @@ const Item = ({ title, image, screen, id }) => {
 
 
 function CBHomeScreen({ navigation }) {
-
     const [userProfile, setUserProfile] = useState(null)
 
     useEffect(() => {
@@ -115,15 +114,14 @@ function CBHomeScreen({ navigation }) {
                 <Text style={{ fontSize: 28, fontWeight: 'bold', color: MAUTIM }}>TÀU CÁ CÀ MAU</Text>
             </View>
 
-            <FlatList style={{}}
+            <FlatList
                 contentContainerStyle={{ alignItems: 'flex-start', marginTop: 10, alignSelf: 'center' }}
                 showsVerticalScrollIndicator={false}
                 numColumns={3}
                 data={DATA}
                 renderItem={({ item, index }) => (
-                    <Item title={item.title} image={item.image} screen={item.screen} id={index + 1}
+                    <Item key={index} title={item.title} image={item.image} screen={item.screen} id={index + 1}
                     />)}
-                keyExtractor={(item) => item.id}
             />
         </View>
     )

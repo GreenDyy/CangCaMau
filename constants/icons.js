@@ -32,4 +32,9 @@ export default {
     infor: require('../assests/icons/infor.png'),
     upload: require('../assests/icons/upload.png'),
     add: require('../assests/icons/add.png'),
+    radioVang: require('../assests/icons/radioVang.png'),
+    radioDo: require('../assests/icons/radioDo.png'),
+    addmini: require('../assests/icons/addmini.png'),
+    checkbox: require('../assests/icons/checkbox.png'),
+    remove: require('../assests/icons/remove.png'),
 }

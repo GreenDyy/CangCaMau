@@ -10,11 +10,11 @@ import {
     Alert
 }
     from 'react-native'
-import { icons } from '../constants/manager'
-import MyTextInput from "../components/mytextinput";
+import { icons } from '../../constants/manager'
+import MyTextInput from "../../components/mytextinput";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function ChiTietTauCaScreen({ navigation }) {
+function CBChiTietTauCaScreen({ navigation }) {
     const [thuGonThongTinTau, setThuGonThongTinTau] = useState(false)
     const [thuGonThongSoKyThuat, setThuGonThongSoKyThuat] = useState(false)
     const [thuGonGiayChungNhan, setThuGonGiayChungNhan] = useState(false)
@@ -249,13 +249,6 @@ function ChiTietTauCaScreen({ navigation }) {
                     }
                 </View>
 
-                {
-                    (userProfile && userProfile.chucvu === 'Cán bộ') &&
-                    <TouchableOpacity onPress={() => navigation.navigate('ThemThuyenVien')}>
-                        <Text style={{ color: '#FF820F', fontSize: 12, marginTop: 10, borderBottomWidth: 1, borderBottomColor: '#FF820F', width: 48, textAlign: 'center' }}>Cập nhật</Text>
-                    </TouchableOpacity>
-                }
-
                 <TouchableOpacity style={{ backgroundColor: '#FFFFFF', borderRadius: 6, paddingVertical: 10, alignItems: 'center', marginTop: 20, marginBottom: 25, width: 175, alignSelf: 'center' }}
                     onPress={() => navigation.goBack()}>
                     <Text style={{ color: '#828282', fontWeight: 'bold' }}>Đóng</Text>
@@ -267,4 +260,4 @@ function ChiTietTauCaScreen({ navigation }) {
     )
 }
 
-export default ChiTietTauCaScreen
+export default CBChiTietTauCaScreen
